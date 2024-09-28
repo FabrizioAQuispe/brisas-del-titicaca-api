@@ -11,7 +11,7 @@ import { PermisosDecorator } from '../utils/Permission/Permisos/PermisosDecorato
 export class EventosController {
   constructor(private readonly eventosService: EventosService) {}
 
-  @UseGuards(JwtAuthGuard, RolesGuard, PermisoGuard)
+  @UseGuards(JwtAuthGuard)
   // @PermisosDecorator([{nombre: 'Administrador'}])
   // @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Get('/listevents')
@@ -25,7 +25,7 @@ export class EventosController {
   }
 
 
-  @UseGuards(JwtAuthGuard,RolesGuard,PermisoGuard)
+  @UseGuards(JwtAuthGuard)
   // @PermisosDecorator([{nombre: 'Administrador'}])
   // @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Get('/buscar/:nombre')
@@ -37,7 +37,7 @@ export class EventosController {
     }
   }
 
-  @UseGuards(JwtAuthGuard,RolesGuard,PermisoGuard)
+  @UseGuards(JwtAuthGuard)
   // @PermisosDecorator([{nombre: 'Administrador'}])
   // @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Post('/create')
@@ -45,7 +45,7 @@ export class EventosController {
     return this.eventosService.createEventos(eventos)
   }
 
-  @UseGuards(JwtAuthGuard,RolesGuard,PermisoGuard)
+  @UseGuards(JwtAuthGuard)
   // @PermisosDecorator([{nombre: 'Administrador'}])
   // @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Put('/update/:idUser')
@@ -53,7 +53,7 @@ export class EventosController {
     return this.eventosService.updateEventos(idUser,eventos)
   }
 
-  @UseGuards(JwtAuthGuard,RolesGuard,PermisoGuard)
+  @UseGuards(JwtAuthGuard)
   // @PermisosDecorator([{nombre: 'Administrador'}])
   // @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Delete('/delete/:idEvento')
