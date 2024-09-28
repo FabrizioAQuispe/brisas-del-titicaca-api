@@ -12,8 +12,8 @@ export class EventosController {
   constructor(private readonly eventosService: EventosService) {}
 
   @UseGuards(JwtAuthGuard, RolesGuard, PermisoGuard)
-  @PermisosDecorator([{nombre: 'Administrador'}])
-  @RolesDecorator([{ nombre: 'ver.eventos' }])
+  // @PermisosDecorator([{nombre: 'Administrador'}])
+  // @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Get('/listevents')
   async getEventos(): Promise<any> { 
     try {
@@ -26,8 +26,8 @@ export class EventosController {
 
 
   @UseGuards(JwtAuthGuard,RolesGuard,PermisoGuard)
-  @PermisosDecorator([{nombre: 'Administrador'}])
-  @RolesDecorator([{ nombre: 'ver.eventos' }])
+  // @PermisosDecorator([{nombre: 'Administrador'}])
+  // @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Get('/buscar/:nombre')
   async getBuscarEventos(@Query() nombre:string){
     try{
@@ -38,24 +38,24 @@ export class EventosController {
   }
 
   @UseGuards(JwtAuthGuard,RolesGuard,PermisoGuard)
-  @PermisosDecorator([{nombre: 'Administrador'}])
-  @RolesDecorator([{ nombre: 'ver.eventos' }])
+  // @PermisosDecorator([{nombre: 'Administrador'}])
+  // @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Post('/create')
   async createEventos(eventos:Eventos){
     return this.eventosService.createEventos(eventos)
   }
 
   @UseGuards(JwtAuthGuard,RolesGuard,PermisoGuard)
-  @PermisosDecorator([{nombre: 'Administrador'}])
-  @RolesDecorator([{ nombre: 'ver.eventos' }])
+  // @PermisosDecorator([{nombre: 'Administrador'}])
+  // @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Put('/update/:idUser')
   async updateEventos(@Param() idUser:number, @Body() eventos:Eventos){
     return this.eventosService.updateEventos(idUser,eventos)
   }
 
   @UseGuards(JwtAuthGuard,RolesGuard,PermisoGuard)
-  @PermisosDecorator([{nombre: 'Administrador'}])
-  @RolesDecorator([{ nombre: 'ver.eventos' }])
+  // @PermisosDecorator([{nombre: 'Administrador'}])
+  // @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Delete('/delete/:idEvento')
   async deleteEventos(@Param() idEvento:number){
     return this.eventosService.deleteEventos(idEvento)
