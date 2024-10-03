@@ -14,18 +14,26 @@ import { PermisosService } from '../permisos/permisos.service';
 import { EventosModule } from '../eventos/eventos.module';
 import { EventosService } from '../eventos/eventos.service';
 import { PermisosController } from '../permisos/permisos.controller';
+import { DanzasModule } from '../danzas/danzas.module';
+import { DanzasController } from '../danzas/danzas.controller';
+import { DanzasService } from '../danzas/danzas.service';
+import { FundadoresService } from '../fundadores/fundadores.service';
+import { FundadoresController } from '../fundadores/fundadores.controller';
+import { FundadoresModule } from '../fundadores/fundadores.module';
 
 @Module({
   imports: [
+    FundadoresModule,
     RolesModule,
     EventosModule,
     UsuariosModule,
+    DanzasModule,
     JwtModule.register({
       secret: 'secretKey',
       signOptions: { expiresIn: '72h' }
     }),
   ],
-  controllers: [AppController,UsuariosController,EventosController,PermisosController],
-  providers: [AppService,PrismaService, UsuariosService,RolesService,PermisosService,JwtAuthGuard,EventosService],
+  controllers: [AppController,UsuariosController,EventosController,PermisosController,DanzasController,FundadoresController],
+  providers: [AppService,PrismaService, UsuariosService,RolesService,PermisosService,JwtAuthGuard,EventosService,DanzasService,FundadoresService],
 })
 export class AppModule {}

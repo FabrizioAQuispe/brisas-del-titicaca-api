@@ -65,6 +65,8 @@ model eventos {
   fecha_creacion DateTime? @db.Date
   fecha_edicion  DateTime? @db.Date
   precio         Float?
+  slug           String?   @db.Text
+  bg_color       String?   @default("000") @db.VarChar(10)
   user           user?     @relation(fields: [idUser], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "eventos_ibfk_1")
 
   @@index([idUser], map: "idUser")
@@ -93,4 +95,20 @@ model talleres {
   user              user?     @relation(fields: [idUser], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "talleres_ibfk_1")
 
   @@index([idUser], map: "idUser")
+}
+
+model fundadodres{
+  id                Int       @id @default(autoincrement())
+  imagen      String? @db.Text
+  nombre      String @db.VarChar(255)
+  fecha       String @db.VarChar(255)
+  descripcion String? @db.Text
+}
+
+model danzas {
+  id          Int      @id @default(autoincrement())
+  nombre      String? @db.Text
+  descripcion String? @db.Text
+  image       String? @db.Text
+  slug        String? @db.Text
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from '../services/prisma.service';
 import { Eventos } from '../model/EventosDTO';
 
@@ -11,46 +11,50 @@ export class EventosService {
     async getEventos() {
         try {
             const result = await this.prisma.eventos.findMany();
+
             return result;
         } catch (error) {
             throw new Error();
         }
     }
 
-    async getBuscarEventos(nombre:string){
-        try{
+    async getBuscarEventos(nombre: string) {
+        try {
             const result = await this.prisma.eventos.findFirst({
                 where: {
-                    nombre:nombre
+                    slug: nombre
                 }
             })
 
-            if(!result){
+            if (!result) {
                 throw new Error('ERROR SEARCH DATA')
             }
 
+            console.log(result, nombre)
+
             return result;
-        }catch(error){
+        } catch (error) {
             throw new Error('ERROR SERVER INTERNAL')
         }
     }
 
-    async createEventos(eventos:Eventos){
-        try{
+    async createEventos(eventos: Eventos) {
+        try {
             const response = await this.prisma.eventos.create({
                 data: eventos
             })
-            if(!response){
+            if (!response) {
                 throw new Error('ERROR AL CREAR DATOS');
             }
+            console.log(response)
             return response;
-        }catch(error){
+        } catch (error) {
             throw new Error('ERROR SERVER INTERNAL');
         }
     }
 
-    async updateEventos(idUser:number,eventos:Eventos){
-        try{
+    async updateEventos(idUser: number, eventos: Eventos) {
+        try {
             const response = await this.prisma.eventos.update({
                 where: {
                     id: Number(idUser)
@@ -58,28 +62,48 @@ export class EventosService {
                 data: eventos
             })
 
-            if(!response){
+            if (!response) {
                 throw new Error('ERROR AL ACTUALIZAR')
             }
-        }catch(error){
+
+            return response;
+
+        } catch (error) {
             throw new Error('ERROR SERVER INTERNAL')
         }
     }
 
-    async deleteEventos(idEvento:number){
-        try{
+    async deleteEventos(idEvento: number) {
+        try {
             const response = await this.prisma.eventos.delete({
                 where: {
                     id: idEvento
                 }
             })
 
-            if(!response){
+            if (!response) {
                 throw new Error('ERROR AL OBTENER RESPUESTAS');
             }
             return response;
-        }catch(error){
+        } catch (error) {
             throw new Error('ERROR SERVER INTERNAL')
+        }
+    }
+
+    async listarEventosPublic(idUser:number){
+        const response = await this.prisma.eventos.findMany({
+            where: {
+                idUser: Number(idUser)
+            }
+        })
+        try{
+            if(!response){
+                throw new UnauthorizedException('LA RESPUESTA NO EXISTE');
+            }
+
+            return response;
+        }catch(error){
+            throw new Error(error);
         }
     }
 }

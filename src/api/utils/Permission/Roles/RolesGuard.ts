@@ -14,6 +14,7 @@ export class RolesGuard implements CanActivate {
     if(!hasPermission){
       throw new UnauthorizedException('NO TIENES LOS PERMISOS PARA VER LOS EVENTOS')
     }
-    return true; 
+
+    return true
   }
-}
+} 
