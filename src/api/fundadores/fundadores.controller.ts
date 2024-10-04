@@ -30,8 +30,9 @@ export class FundadoresController {
 
     @UseGuards(JwtAuthGuard)
     @Put('/updatefundadores')
-    async updateFundadores(@Body() idFundador:number,fundadores:Fundadores){
-        return this.fundadoresService.updateFundadores(idFundador,fundadores)
+    async updateFundadores(@Body()fundadores:Fundadores){
+        console.log(fundadores)
+        return this.fundadoresService.updateFundadores(fundadores)
     }
 
     @UseGuards(JwtAuthGuard)

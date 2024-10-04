@@ -107,8 +107,8 @@ model fundadodres{
 
 model danzas {
   id          Int      @id @default(autoincrement())
-  nombre      String? @db.Text
-  descripcion String? @db.Text
+  nombre      Json? 
+  descripcion Json? 
   image       String? @db.Text
   slug        String? @db.Text
 }

@@ -38,11 +38,11 @@ export class FundadoresService {
         }
     }
 
-    async updateFundadores(idFundador:number,fundadores:Fundadores){
+    async updateFundadores(fundadores:Fundadores){
         try{
             const response = await this.prisma.fundadodres.update({
                 where: {
-                    id: Number(idFundador)
+                    id: Number(fundadores.id)
                 },
                 data: fundadores
             })
@@ -54,7 +54,7 @@ export class FundadoresService {
 
             return response;
         }catch(error){
-            throw new Error('ERROR SERVER INTERNAL: ' );
+            throw new Error('ERROR SERVER INTERNAL: ' + error );
         }
     }
 
@@ -70,6 +70,8 @@ export class FundadoresService {
             if(!response){
                 throw new Error('ERROR AL ELIMINAR FUNDADOR');
             }
+
+            return response;
         }catch(error){
             throw new Error('ERROR SERVER INTERNAL' )
         }
