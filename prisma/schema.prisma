@@ -112,3 +112,19 @@ model danzas {
   image       String? @db.Text
   slug        String? @db.Text
 }
+
+model categorias {
+  id          Int      @id @default(autoincrement())
+  nombre      String   @db.VarChar(255)
+  comidas     comidas[] @relation("CategoriaComidas")
+}
+
+model comidas {
+  id          Int      @id @default(autoincrement())
+  idUser      Int
+  nombre      String @db.VarChar(255)
+  descripcion String? @db.Text
+  precio      Float?  @default(0.00) 
+  categoriaId Int
+  categoria   categorias @relation("CategoriaComidas", fields: [categoriaId], references: [id])
+}
