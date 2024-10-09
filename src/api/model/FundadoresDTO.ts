@@ -3,5 +3,8 @@ export interface Fundadores{
     imagen:string,
     nombre:string,
     fecha:string,
-    descripcion:string
+    descripcion: {
+        'en': string,
+        'es': string
+    },
 }

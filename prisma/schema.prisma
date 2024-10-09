@@ -102,7 +102,7 @@ model fundadodres{
   imagen      String? @db.Text
   nombre      String @db.VarChar(255)
   fecha       String @db.VarChar(255)
-  descripcion String? @db.Text
+  descripcion Json? 
 }
 
 model danzas {
