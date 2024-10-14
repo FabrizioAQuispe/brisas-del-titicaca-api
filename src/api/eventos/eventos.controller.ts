@@ -12,7 +12,6 @@ export class EventosController {
   constructor(private readonly eventosService: EventosService) { }
 
   @UseGuards(JwtAuthGuard, RolesGuard, PermisoGuard)
-  @PermisosDecorator([{ nombre: 'Administrador' }])
   @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Get('/listevents')
   async getEventos(): Promise<any> {
@@ -25,7 +24,6 @@ export class EventosController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard, PermisoGuard)
-  @PermisosDecorator([{ nombre: 'Administrador' }])
   @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Get('/listeventos')
   async getEventosPermisos(): Promise<any> {
@@ -39,7 +37,6 @@ export class EventosController {
 
 
   @UseGuards(JwtAuthGuard)
-  @PermisosDecorator([{nombre: 'Administrador'}])
   @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Get('/buscar/:nombre')
   async getBuscarEventos(@Query() nombre: string) {
@@ -61,7 +58,6 @@ export class EventosController {
 
 
   @UseGuards(JwtAuthGuard)
-  @PermisosDecorator([{nombre: 'Administrador'}])
   @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Post('/create')
   async createEventos(eventos: Eventos) {
@@ -69,7 +65,6 @@ export class EventosController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @PermisosDecorator([{nombre: 'Administrador'}])
   @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Put('/update/:idUser')
   async updateEventos(@Param('idUser') idUser: number, @Body() eventos: Eventos) {
@@ -80,7 +75,6 @@ export class EventosController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @PermisosDecorator([{nombre: 'Administrador'}])
   @RolesDecorator([{ nombre: 'ver.eventos' }])
   @Delete('/delete/:idEvento')
   async deleteEventos(@Param() idEvento: number) {
