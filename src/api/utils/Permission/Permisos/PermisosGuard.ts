@@ -9,12 +9,12 @@ export class PermisoGuard implements CanActivate {
         const request = context.switchToHttp().getRequest();
         const user = request["data"]?.data;
         const administrador = user;
-        console.log(administrador);
         const validarAdministrador = administrador[0].rol.nombre;
-        console.log(validarAdministrador)
+        console.log(administrador[0].rol.nombre)
         if (validarAdministrador != 'Administrador') {
             return false;
         }
+
         return true;
     }
 }
