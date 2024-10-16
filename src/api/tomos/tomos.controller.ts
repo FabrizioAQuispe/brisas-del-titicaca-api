@@ -10,19 +10,19 @@ export class TomosController {
     ){}
 
     @UseGuards(JwtAuthGuard)
-    @Get('/list/tomos')
+    @Get('/list')
     async getTomos(){
         return this.tomosService.getTomos();
     }
 
     @UseGuards(JwtAuthGuard)
-    @Post('/create/tomos')
+    @Post('/create')
     async createTomos(@Body() tomos:Tomos){
         return this.tomosService.createTomos(tomos)
     }
 
     @UseGuards(JwtAuthGuard)
-    @Put('/update/tomos/:idTomo')
+    @Put('/update/:idTomo')
     async updateTomos(@Body() tomos:Tomos,@Param('idTomo') idTomo:number){
         return this.tomosService.updateTomos(tomos,idTomo)
     }
