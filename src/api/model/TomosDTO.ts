@@ -8,11 +8,14 @@ export interface TomosContenido {
 
 export interface Tomos {
   id: number;
-  titulo: string;
+  titulo: {
+    'en': string,
+    'es': string
+  },
   image: string;
 }
 
-export interface MessageTomos{
+export interface MessageTomos {
   code: number
   message: string
 

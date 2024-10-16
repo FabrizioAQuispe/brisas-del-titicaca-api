@@ -121,15 +121,15 @@ model categorias {
 
 model tomos_contenido{
   id          Int      @id @default(autoincrement())
-  titulo      String?   @db.VarChar(255)
-  descripcion      String @db.VarChar(255)
-  leyenda     String @db.Text
+  titulo      Json? 
+  descripcion      Json? 
+  leyenda     Json? 
   image       String? @db.Text
 }
 
 model tomos{
   id          Int      @id @default(autoincrement())
-  titulo      String @db.VarChar(255)
+  titulo      Json? 
   image       String @db.Text
 }
 
