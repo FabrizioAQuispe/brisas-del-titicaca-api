@@ -1,7 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Danzas, MensajeActualizadoDanzas, MensajeDanzas, MensajeEliminadoDanzas } from '../model/DanzasDTO';
 import { PrismaService } from '../services/prisma.service';
-import { Eventos } from '../model/EventosDTO';
 
 @Injectable()
 export class DanzasService {

@@ -119,6 +119,20 @@ model categorias {
   comidas     comidas[] @relation("CategoriaComidas")
 }
 
+model tomos_contenido{
+  id          Int      @id @default(autoincrement())
+  titulo      String?   @db.VarChar(255)
+  descripcion      String @db.VarChar(255)
+  leyenda     String @db.Text
+  image       String? @db.Text
+}
+
+model tomos{
+  id          Int      @id @default(autoincrement())
+  titulo      String @db.VarChar(255)
+  image       String @db.Text
+}
+
 model comidas {
   id          Int      @id @default(autoincrement())
   idUser      Int
@@ -128,3 +142,4 @@ model comidas {
   categoriaId Int
   categoria   categorias @relation("CategoriaComidas", fields: [categoriaId], references: [id])
 }
+
