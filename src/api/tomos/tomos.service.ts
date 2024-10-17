@@ -39,7 +39,7 @@ export class TomosService {
         }
     }
 
-    async getTomos(){
+    async getTomosList(){
         try{
             const response = await this.prisma.tomos.findMany();
             

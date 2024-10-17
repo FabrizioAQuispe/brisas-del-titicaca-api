@@ -10,15 +10,15 @@ export class TomosController {
     ){}
 
     @UseGuards(JwtAuthGuard)
-    @Get('/:id')
+    @Get('/id/:id')
     async getTomosById(@Param('id') id:number){
         return this.tomosService.getTomosById(id);
     }
 
-    // @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Get('/list')
     async getTomos(){
-        return this.tomosService.getTomos();
+        return this.tomosService.getTomosList();
     }
 
     @UseGuards(JwtAuthGuard)
