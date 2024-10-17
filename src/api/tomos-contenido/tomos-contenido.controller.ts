@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { TomosContenidoService } from './tomos-contenido.service';
-import { Tomos } from '../model/TomosDTO';
+import { Contenido, Tomos } from '../model/TomosDTO';
 import { JwtAuthGuard } from '../utils/Security/JwtService';
 
 @Controller('tomos-contenido')
@@ -17,13 +17,13 @@ export class TomosContenidoController {
 
     @UseGuards(JwtAuthGuard)
     @Post('/create')
-    async createTomos(@Body() tomos:Tomos){
+    async createTomos(@Body() tomos:Contenido){
         return this.tomosService.createTomos(tomos)
     }
 
     @UseGuards(JwtAuthGuard)
     @Put('/update/:idTomo')
-    async updateTomos(@Body() tomos:Tomos,@Param('idTomo') idTomo:number){
+    async updateTomos(@Body() tomos:Contenido,@Param('idTomo') idTomo:number){
         return this.tomosService.updateTomos(tomos,idTomo)
     }
 

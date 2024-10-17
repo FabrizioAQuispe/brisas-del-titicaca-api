@@ -1,11 +1,24 @@
-export interface TomosContenido {
-  id: number;
-  titulo?: string;
-  descripcion: string;
-  leyenda: string;
-  image?: string;
+export interface TomosContenido  extends Contenido{
+  tomos:Tomos
 }
 
+export interface Contenido{
+  id: number;
+  titulo?: {
+    en: string;
+    es: string;
+  };
+  descripcion?: {
+    en: string;
+    es: string;
+  };
+  leyenda?: {
+    en: string;
+    es: string;
+  };
+  image?: string;
+  tomoId: number; // Referencia al ID del tomo al que pertenece
+}
 export interface Tomos {
   id: number;
   titulo: {

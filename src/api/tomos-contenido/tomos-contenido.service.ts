@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../services/prisma.service';
-import { Tomos,MessageTomos } from '../model/TomosDTO';
+import { Tomos,TomosContenido,MessageTomos, Contenido } from '../model/TomosDTO';
 
 @Injectable()
 export class TomosContenidoService {
@@ -23,9 +23,9 @@ export class TomosContenidoService {
         }
     }
 
-    async createTomos(tomos:Tomos){
+    async createTomos(tomos:Contenido){
         try{
-            const response = await this.prisma.tomos.createMany({
+            const response = await this.prisma.tomos_contenido.createMany({
                 data: tomos
             })
 
@@ -44,11 +44,12 @@ export class TomosContenidoService {
         }
     }
 
-    async updateTomos(tomos:Tomos,idTomo:number){
+    async updateTomos(tomos:Contenido,idTomo:number){
         try{
-            const response = await this.prisma.tomos.update({
+            const response = await this.prisma.tomos_contenido.update({
                 where: {
-                    id: Number(idTomo)
+                    id: Number(idTomo),
+
                 },
                 data: tomos
             })
@@ -70,7 +71,7 @@ export class TomosContenidoService {
 
     async deleteTomos(idTomo:number){
         try{
-            const response = await this.prisma.tomos.delete({
+            const response = await this.prisma.tomos_contenido.delete({
                 where: {
                     id: Number(idTomo)
                 }
