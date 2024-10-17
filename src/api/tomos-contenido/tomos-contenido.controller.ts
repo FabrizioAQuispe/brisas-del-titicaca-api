@@ -5,7 +5,7 @@ import { JwtAuthGuard } from '../utils/Security/JwtService';
 
 @Controller('tomos-contenido')
 export class TomosContenidoController {
-    constructor(
+    constructor( 
         private tomosService:TomosContenidoService
     ){}
 

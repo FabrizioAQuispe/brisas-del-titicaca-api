@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../services/prisma.service';
 import { Tomos,MessageTomos } from '../model/TomosDTO';
+import { response } from 'express';
 
 @Injectable()
 export class TomosService {
@@ -14,6 +15,34 @@ export class TomosService {
                 where: {
                     id: Number(id)
                 },
+                include: {
+                    contenidos: true,
+                    _count: true
+                }
+            })
+
+                        
+            if(!response){
+                throw new Error('ERROR FETCH DATA 404');
+            }
+
+            
+            const result:MessageTomos = {
+                code: 200,
+                message: 'SE LISTO CORRECTAMENTE',
+                data: response
+            }
+
+            return result;
+
+        }catch(error){
+            throw new Error('ERROR SERVER RESPONSE: ' + error);
+        }
+    }
+
+    async getTomosPublic(){
+        try{
+            const response = await this.prisma.tomos.findMany({
                 include: {
                     contenidos: true,
                     _count: true
