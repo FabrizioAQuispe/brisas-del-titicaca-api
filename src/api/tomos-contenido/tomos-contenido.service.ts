@@ -3,37 +3,11 @@ import { PrismaService } from '../services/prisma.service';
 import { Tomos,MessageTomos } from '../model/TomosDTO';
 
 @Injectable()
-export class TomosService {
+export class TomosContenidoService {
     constructor(
         private prisma:PrismaService
     ){}
 
-    async getTomosById(id:number){
-        try{
-            const response = await this.prisma.tomos.findFirst({
-                where: {
-                    id: Number(id)
-                }
-            })
-
-                        
-            if(!response){
-                throw new Error('ERROR FETCH DATA 404');
-            }
-
-            
-            const result:MessageTomos = {
-                code: 200,
-                message: 'SE LISTO CORRECTAMENTE',
-                data: response
-            }
-
-            return result;
-
-        }catch(error){
-            throw new Error('ERROR SERVER RESPONSE: ' + error);
-        }
-    }
 
     async getTomos(){
         try{
@@ -61,7 +35,7 @@ export class TomosService {
 
             const message:MessageTomos = {
                 code: 201,
-                message: 'SE CREO CON EXITO',
+                message: 'SE CREO CON EXITO'
             }
 
             return message;
@@ -85,7 +59,7 @@ export class TomosService {
 
             const message:MessageTomos = {
                 code: 201,
-                message: 'SE ACTUALIZO CON ÉXITO',
+                message: 'SE ACTUALIZO CON ÉXITO'
             }
 
             return message;

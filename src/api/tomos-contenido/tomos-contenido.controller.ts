@@ -1,19 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
-import { TomosService } from './tomos.service';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { TomosContenidoService } from './tomos-contenido.service';
 import { Tomos } from '../model/TomosDTO';
 import { JwtAuthGuard } from '../utils/Security/JwtService';
 
 @Controller('tomos')
-export class TomosController {
+export class TomosContenidoController {
     constructor(
-        private tomosService:TomosService
+        private tomosService:TomosContenidoService
     ){}
-
-    @UseGuards(JwtAuthGuard)
-    @Get('/:id')
-    async getTomosById(@Param('id') id:number){
-        return this.tomosService.getTomosById(id);
-    }
 
     @UseGuards(JwtAuthGuard)
     @Get('/list')

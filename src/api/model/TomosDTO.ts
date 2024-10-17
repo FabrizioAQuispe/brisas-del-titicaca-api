@@ -18,5 +18,5 @@ export interface Tomos {
 export interface MessageTomos {
   code: number
   message: string
-
+  data?: any
 }
