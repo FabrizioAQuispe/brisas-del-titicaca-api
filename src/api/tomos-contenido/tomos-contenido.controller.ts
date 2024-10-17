@@ -3,7 +3,7 @@ import { TomosContenidoService } from './tomos-contenido.service';
 import { Tomos } from '../model/TomosDTO';
 import { JwtAuthGuard } from '../utils/Security/JwtService';
 
-@Controller('tomos')
+@Controller('tomos-contenido')
 export class TomosContenidoController {
     constructor(
         private tomosService:TomosContenidoService
