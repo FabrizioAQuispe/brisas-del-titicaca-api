@@ -13,6 +13,10 @@ export class TomosService {
             const response = await this.prisma.tomos.findFirst({
                 where: {
                     id: Number(id)
+                },
+                include: {
+                    contenidos: true,
+                    _count: true
                 }
             })
 
