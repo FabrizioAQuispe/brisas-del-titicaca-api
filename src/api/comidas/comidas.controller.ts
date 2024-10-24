@@ -3,12 +3,32 @@ import { ComidasModule } from './comidas.module';
 import { ComidasService } from './comidas.service';
 import { JwtAuthGuard } from '../utils/Security/JwtService';
 import { Comidas } from '../model/EntradasDTO';
+import { ComidasPublic } from '../model/ComidasCategoriaDTO';
 
 @Controller('comidas')
 export class ComidasController {
     constructor(
         private comidasService:ComidasService
     ){}
+
+    @Post('/createcomidasdpublic')
+    async createComidasByCategoria(@Body() comidasPublic:ComidasPublic){
+        try {
+            const response = await this.comidasService.createComidasByCategoria(comidasPublic);
+            return response;
+        } catch (error) {
+            throw new Error('ERROR CONTROLLER' + error)
+        }
+    }
+    @Get('/listcomidaspublic')
+    async getComidasByCategoria(){
+        try{
+            const response = await this.comidasService.getComidasByCategoria();
+            return response
+        }catch(error){
+            throw new Error('ERROR CONTROLLER' + error);
+        }
+    }
 
     @Get('/listcomidas')
     async getComidas(){

@@ -144,6 +144,7 @@ model comidas {
   descripcion String? @db.Text
   precio      Float?  @default(0.00) 
   categoriaId Int
+  image       String?  @db.Text
   categoria   categorias @relation("CategoriaComidas", fields: [categoriaId], references: [id])
 }
 

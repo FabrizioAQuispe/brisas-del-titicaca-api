@@ -17,7 +17,7 @@ export interface Contenido{
     es: string;
   };
   image?: string;
-  tomoId: number; // Referencia al ID del tomo al que pertenece
+  tomoId: number; 
 }
 export interface Tomos {
   id: number;

@@ -32,6 +32,6 @@ export class DanzasController {
 
     @Delete('/deletedanzas/:idDanza')
     async deleteDanzasAdmin(@Param('idDanza') idDanza:number){
-        return this.deleteDanzasAdmin(idDanza)
+        return this.danzasService.deleteDanzasAdmin(idDanza)
     }
 }

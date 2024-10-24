@@ -48,6 +48,7 @@ export class EventosService {
             }
             console.log(response)
             return response;
+
         } catch (error) {
             throw new Error('ERROR SERVER INTERNAL');
         }
@@ -88,7 +89,7 @@ export class EventosService {
         } catch (error) {
             throw new Error('ERROR SERVER INTERNAL')
         }
-    }
+    }                 
 
     async listarEventosPublic(idUser:number){
         const response = await this.prisma.eventos.findMany({
