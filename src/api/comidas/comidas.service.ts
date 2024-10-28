@@ -22,6 +22,37 @@ export class ComidasService {
             throw new Error('ERROR SERVER RESPONSE' + error); 
         }
     }
+
+    async createComidasByCategoriaAdmin(comidasAdmin: ComidasPublic){
+        try {
+            const response = await this.prisma.categorias.create({
+                data: comidasAdmin
+            })
+            if(!response){
+                throw new Error('ERROR AL CREAR COMIDA');
+            }
+            return response;
+        } catch (error) {
+            throw new Error('ERROR SERVER RESPONSE' + error);
+        }   
+    }
+
+    async getComidasByCategoriaAdmin(){
+        try {
+            const response = await this.prisma.categorias.findMany({
+                include: {
+                    comidas: true
+                }
+            })
+            if(!response){
+                throw new Error('ERROR SERVER SERVICE');
+            }
+            return response;
+        } catch (error) {
+            throw new Error('ERROR SERVER RESPONSE: ' + error);
+        }
+    }
+
     async getComidasByCategoria(){
         try {
             const response = await this.prisma.categorias.findMany({

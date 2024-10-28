@@ -115,7 +115,7 @@ export class RolesService {
                         }
                     }
                 }
-            })
+            }) 
             return rolesResult;
         } catch (error) {
             throw new Error(error);

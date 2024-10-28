@@ -20,6 +20,18 @@ export class ComidasController {
             throw new Error('ERROR CONTROLLER' + error)
         }
     }
+    @UseGuards(JwtAuthGuard)
+    @Get('/listcomidasadmin')
+    async getComidasByCategoriaAdmin(){
+        try{
+            const response = await this.comidasService.getComidasByCategoriaAdmin();
+            return response
+        }catch(error){
+            throw new Error('ERROR CONTROLLER' + error);
+        }   
+    }
+
+
     @Get('/listcomidaspublic')
     async getComidasByCategoria(){
         try{
