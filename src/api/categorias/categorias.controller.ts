@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { CategoriasService } from './categorias.service';
 import { JwtAuthGuard } from '../utils/Security/JwtService';
 import { CategoriasPublic } from '../model/ComidasCategoriaDTO';
@@ -22,8 +22,9 @@ export class CategoriasController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Put('/update')
-    async updateCategoriasAdmin(id: number, categoria: CategoriasPublic){
+    @Put('/update/:id')
+    async updateCategoriasAdmin(@Param('id') id: number, categoria: CategoriasPublic){
         return this.categoriasService.updateCategoriasAdmin(id, categoria);
     }
 }
+

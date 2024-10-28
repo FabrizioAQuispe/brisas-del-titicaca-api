@@ -26,7 +26,7 @@ export class CategoriasService {
             if(!response){
                 throw new Error('ERROR SERVICE RESPONSE' );
             }
-            return categoria;
+            return response;
         } catch(err){
             throw new Error(`Error al crear categoría: ${err.message}`);
         }
