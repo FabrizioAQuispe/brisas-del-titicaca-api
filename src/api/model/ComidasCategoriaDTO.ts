@@ -1,11 +1,4 @@
-export interface ComidasPublic{
-    id:number,
-    idUser:number,
-    nombre:string,
-    descripcion?:string,
-    precio?:number,
-    categoriaId:number,
-    image?:string,
+export interface ComidasPublic extends Comidass{
     categoria:CategoriasPublic
 }
 
@@ -14,3 +7,14 @@ export interface CategoriasPublic{
     nombre:string,
     descripcion:string
 }
+
+export interface Comidass{
+    id:number,
+    idUser:number,
+    nombre:string,
+    descripcion?:string,
+    precio?:number,
+    categoriaId:number,
+    image?:string,
+}
+

@@ -3,7 +3,7 @@ import { ComidasModule } from './comidas.module';
 import { ComidasService } from './comidas.service';
 import { JwtAuthGuard } from '../utils/Security/JwtService';
 import { Comidas } from '../model/EntradasDTO';
-import { ComidasPublic } from '../model/ComidasCategoriaDTO';
+import { ComidasPublic, Comidass } from '../model/ComidasCategoriaDTO';
 
 @Controller('comidas')
 export class ComidasController {
@@ -12,7 +12,7 @@ export class ComidasController {
     ){}
 
     @Post('/createcomidasdpublic')
-    async createComidasByCategoria(@Body() comidasPublic:ComidasPublic){
+    async createComidasByCategoria(@Body() comidasPublic:Comidass){
         try {
             const response = await this.comidasService.createComidasByCategoria(comidasPublic);
             return response;

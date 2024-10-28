@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Categorias, Comidas } from '../model/EntradasDTO';
 import { PrismaService } from '../services/prisma.service';
-import { ComidasPublic,CategoriasPublic } from '../model/ComidasCategoriaDTO';
+import { Comidass,CategoriasPublic } from '../model/ComidasCategoriaDTO';
 @Injectable()
 export class ComidasService {
     constructor(
@@ -9,7 +9,7 @@ export class ComidasService {
     ) { }
 
 
-    async createComidasByCategoria(comidasPublic:ComidasPublic){
+    async createComidasByCategoria(comidasPublic:Comidass){
         try {
             const response = await this.prisma.categorias.create({
                 data: comidasPublic
