@@ -23,7 +23,7 @@ export class CategoriasController {
 
     @UseGuards(JwtAuthGuard)
     @Put('/update/:id')
-    async updateCategoriasAdmin(@Param('id') id: number, categoria: CategoriasPublic){
+    async updateCategoriasAdmin(@Param('id') id: number, @Body() categoria: CategoriasPublic){
         return this.categoriasService.updateCategoriasAdmin(id, categoria);
     }
 }
