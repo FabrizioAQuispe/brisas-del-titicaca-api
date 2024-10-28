@@ -11,7 +11,7 @@ export class ComidasService {
 
     async createComidasByCategoria(comidasPublic:Comidass){
         try {
-            const response = await this.prisma.categorias.create({
+            const response = await this.prisma.comidas.create({
                 data: comidasPublic
             })
             console.log(response)
