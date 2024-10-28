@@ -11,7 +11,8 @@ export class ComidasController {
         private comidasService:ComidasService
     ){}
 
-    @Post('/createcomidasdpublic')
+    @UseGuards(JwtAuthGuard)
+    @Post('/create')
     async createComidasByCategoria(@Body() comidasPublic:Comidass){
         try {
             const response = await this.comidasService.createComidasByCategoria(comidasPublic);
