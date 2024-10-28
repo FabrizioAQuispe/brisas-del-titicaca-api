@@ -116,7 +116,7 @@ export class ComidasService {
     }
 
 
-    async updateComidas(idComida:number,comidas:Comidas){
+    async updateComidas(idComida:number,comidas:Comidass){
         try{
             const response = await this.prisma.eventos.update({
                 where:{

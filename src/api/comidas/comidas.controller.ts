@@ -55,13 +55,13 @@ export class ComidasController {
 
     @UseGuards(JwtAuthGuard)
     @Post('/createcomidas')
-    async createComidas(@Body() comidas:Comidas){
+    async createComidas(@Body() comidas:Comidass){
         return this.comidasService.createComidas(comidas);
     }
 
     @UseGuards(JwtAuthGuard)
     @Put('/updatecomidas')
-    async updateComidas(@Param('idComida') idComida:number,@Body() comidas:Comidas){
+    async updateComidas(@Param('idComida') idComida:number,@Body() comidas:Comidass){
         return this.comidasService.updateComidas(idComida,comidas);
     }
 
