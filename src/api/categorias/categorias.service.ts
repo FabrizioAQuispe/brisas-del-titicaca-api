@@ -36,7 +36,7 @@ export class CategoriasService {
         try {
             const response = await this.prisma.categorias.updateMany({
                 where: {
-                    id: id
+                    id: Number(id)
                 },
                 data: categoria 
             })
