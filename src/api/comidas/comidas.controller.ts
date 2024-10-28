@@ -61,7 +61,7 @@ export class ComidasController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Put('/updatecomidas')
+    @Put('/update/:idComida')
     async updateComidas(@Param('idComida') idComida:number,@Body() comidas:Comidass){
         return this.comidasService.updateComidas(idComida,comidas);
     }
