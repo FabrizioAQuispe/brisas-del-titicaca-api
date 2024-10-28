@@ -9,7 +9,7 @@ export interface CategoriasPublic{
 }
 
 export interface Comidass{
-    id:number,
+    id?:number,
     idUser:number,
     nombre:string,
     descripcion?:string,
