@@ -29,7 +29,7 @@ export class PopupController {
     }
 
     @Put('/update/:idPopup')
-    async updatePopup(@Param('idPopup') idPopup:Number,@Body() popup:Popup){
+    async updatePopup(@Param('idPopup') idPopup:number,@Body() popup:Popup){
         try {
             return this.popupService.updatePopup(idPopup, popup);
         } catch (error) {
