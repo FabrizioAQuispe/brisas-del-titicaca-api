@@ -23,11 +23,11 @@ export class PresidentesService {
 
     async createPresidents(presidentes: Presidentes){
         try {
-            const result = await this.prisma.presidentes.createMany({
+            const result = await this.prisma.presidentes.create({
                 data: presidentes
             });
 
-            if(!result.count){
+            if(!result){
                 throw new Error('ERROR CREATE PRESIDENTS');
             }
 
