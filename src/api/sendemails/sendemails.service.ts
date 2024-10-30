@@ -7,15 +7,20 @@ export class SendemailsService {
         private  readonly mailService: MailerService
     ){}
 
-    sendMail(){
-        const message = 'MENSAJE ENVIADO'
-        const response = this.mailService.sendMail({
-            from: 'Kingsley Okure <alekzander.fabrizio@gmail.com>',
-            to: 'fabrizioquispe1900@gmail.com',
-            subject: `Enviando desde NestJs`,
-            text: message,      
-        })
-
-        console.log(response)
+    async sendMail() {
+        const message = 'MENSAJE ENVIADO';
+        try {
+            const response = await this.mailService.sendMail({
+                from: 'Kingsley Okure <alekzander.fabrizio@gmail.com>',
+                to: 'fabrizioquispe1900@gmail.com',
+                subject: 'Enviando desde NestJs',
+                text: message,
+            });
+            console.log('Correo enviado:', response);
+        } catch (error) {
+            console.error('Error al enviar correo:', error);
+        }
     }
+
+
 }

@@ -44,6 +44,9 @@ import { PromocionesService } from '../promociones/promociones.service';
 import { SendemailsService } from '../sendemails/sendemails.service';
 import { SendemailsModule } from '../sendemails/sendemails.module';
 import { SendemailsController } from '../sendemails/sendemails.controller';
+import { EventosCulturalesController } from '../eventos-culturales/eventos-culturales.controller';
+import { EventosCulturalesModule } from '../eventos-culturales/eventos-culturales.module';
+import { EventosCulturalesService } from '../eventos-culturales/eventos-culturales.service';
 @Module({
   imports: [
     FundadoresModule,
@@ -59,12 +62,13 @@ import { SendemailsController } from '../sendemails/sendemails.controller';
     PresidentesModule,
     PromocionesModule,
     SendemailsModule,
+    EventosCulturalesModule,
     JwtModule.register({
       secret: 'secretKey',
       signOptions: { expiresIn: '72h' }
     }),
   ],
-  controllers: [SendemailsController,PromocionesController,PresidentesController,PopupController,AppController,UsuariosController,EventosController,PermisosController,DanzasController,FundadoresController,ComidasController,TomosController,TomosContenidoController,CategoriasController],
-  providers: [SendemailsService,PromocionesService,PresidentesService,PopupService,AppService,PrismaService, UsuariosService,RolesService,PermisosService,JwtAuthGuard,EventosService,DanzasService,FundadoresService,ComidasService,TomosService,TomosContenidoService,CategoriasService],
+  controllers: [EventosCulturalesController,SendemailsController,PromocionesController,PresidentesController,PopupController,AppController,UsuariosController,EventosController,PermisosController,DanzasController,FundadoresController,ComidasController,TomosController,TomosContenidoController,CategoriasController],
+  providers: [EventosCulturalesService,SendemailsService,PromocionesService,PresidentesService,PopupService,AppService,PrismaService, UsuariosService,RolesService,PermisosService,JwtAuthGuard,EventosService,DanzasService,FundadoresService,ComidasService,TomosService,TomosContenidoService,CategoriasService],
 })
 export class AppModule {}
