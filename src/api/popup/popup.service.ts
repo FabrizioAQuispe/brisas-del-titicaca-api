@@ -51,7 +51,7 @@ export class PopupService {
         }
     }
 
-    async deletePopup(idPopup:Number){
+    async deletePopup(idPopup:number){
         try {
             const result = await this.prisma.popup.findFirst({
                 where: {

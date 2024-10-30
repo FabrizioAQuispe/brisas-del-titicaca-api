@@ -37,7 +37,7 @@ export class PopupController {
         }
     }
     @Delete('/delete/:idPopup')
-    async deletePopup(@Param('idPopup') idPopup:Number){
+    async deletePopup(@Param('idPopup') idPopup:number){
         try {
             return this.popupService.deletePopup(idPopup);
         } catch (error) {
