@@ -36,7 +36,7 @@ export class PromocionesService {
         try {
             const result = await this.prisma.promociones.update({
                 where: {
-                    id: idPromocion
+                    id: Number(idPromocion)
                 },
                 data: promociones
             });

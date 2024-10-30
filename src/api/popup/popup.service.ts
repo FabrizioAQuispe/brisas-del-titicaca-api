@@ -32,7 +32,7 @@ export class PopupService {
         }
     }
 
-    async updatePopup(idPopup:Number, popup:Popup){
+    async updatePopup(idPopup:number, popup:Popup){
         try {
             const res = await this.prisma.popup.findFirst({
                 where: {
