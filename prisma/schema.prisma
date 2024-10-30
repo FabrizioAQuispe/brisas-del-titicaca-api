@@ -169,3 +169,8 @@ model promociones{
   imagePlato       String?   @db.Text
   dia      String    @db.VarChar(255)
 }
+
+model eventos_culturales{
+  id          Int       @id @default(autoincrement())
+  image       String?  @db.Text
+}
