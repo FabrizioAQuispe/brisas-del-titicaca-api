@@ -28,6 +28,14 @@ export class PopupController {
         }
     }
 
+    @Put('/update/:idPopup')
+    async updatePopup(@Param('idPopup') idPopup:Number,@Body() popup:Popup){
+        try {
+            return this.popupService.updatePopup(idPopup, popup);
+        } catch (error) {
+            throw new Error('ERROR CONTROLLER' + error.message)
+        }
+    }
     @Delete('/delete/:idPopup')
     async deletePopup(@Param('idPopup') idPopup:Number){
         try {

@@ -27,7 +27,7 @@ export class PresidentesService {
                 data: presidentes
             });
 
-            if(!result){
+            if(!result.count){
                 throw new Error('ERROR CREATE PRESIDENTS');
             }
 
@@ -47,6 +47,55 @@ export class PresidentesService {
             return res;
         } catch (error) {
 
+        }
+    }
+
+    async updatePresidents(idPresident:number,presidentes: Presidentes){
+        try {
+            const result = await this.prisma.presidentes.findFirst({
+                where:{
+                    id: Number(idPresident)
+                }
+            })
+
+            if(!result.id){
+                throw new Error('ERROR TO FIND PRESIDENT');
+            }
+            
+            const response = await this.prisma.presidentes.update({
+                where:{
+                    id: Number(result.id)
+                },
+                data: presidentes
+            })
+
+            return response;
+        } catch (error) {
+            throw new Error('ERROR SERVICE' + error.message);
+        }
+    }
+
+    async deletePresident(idPresident:number){  
+        try {
+            const result = await this.prisma.presidentes.findFirst({
+                where: {
+                    id: Number(idPresident)
+                }
+            });
+
+            if(!result.id){
+                throw new Error('ERROR TO FIND PRESIDENT');
+            }
+
+            const response = await this.prisma.presidentes.delete({
+                where: {
+                    id: Number(result.id)
+                }
+            });
+
+            return response;
+        } catch (error) {
+            throw new Error('ERROR SERVICE' + error.message);
         }
     }
 }

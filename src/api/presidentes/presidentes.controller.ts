@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { PresidentesService } from './presidentes.service';
 import { Presidentes } from '../model/PresidentesDTO';
 
@@ -23,6 +23,24 @@ export class PresidentesController {
             return this.presidentService.createPresidents(presidentes);
         } catch (error) {
             throw new Error('ERROR CONTROLLER' + error.message);
+        }
+    }
+
+    @Put('/update/:idPresident')
+    async updatePresidents(@Param('idPresident') idPresident:number,@Body() presidentes: Presidentes){
+        try {
+            return this.presidentService.updatePresidents(idPresident, presidentes);
+        } catch (error) {
+            throw new Error('ERROR CONTROLLER' + error.message)
+        }
+    }
+
+    @Delete('/delete/:idPresident')
+    async deletePresident(@Param('idPresident') idPresident:number){  
+        try {
+            return this.presidentService.deletePresident(idPresident);
+        } catch (error) {
+            throw new Error('ERROR CONTROLLER' + error.message)
         }
     }
 

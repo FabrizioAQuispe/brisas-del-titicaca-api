@@ -165,6 +165,7 @@ model popup{
 
 model promociones{
   id          Int       @id @default(autoincrement())
-  image       String?   @db.Text
+  imageFondo       String?   @db.Text
+  imagePlato       String?   @db.Text
   dia      String    @db.VarChar(255)
 }
