@@ -148,3 +148,23 @@ model comidas {
   categoria   categorias @relation("CategoriaComidas", fields: [categoriaId], references: [id])
 }
 
+model presidentes {
+  id          Int       @id @default(autoincrement())
+  nombre      String    @db.VarChar(255)
+  fecha       String    @db.VarChar(255)
+  descripcion Json?
+  imagePresident       String?   @db.Text
+  imageJunta       String?   @db.Text
+}
+
+model popup{
+  id          Int       @id @default(autoincrement())
+  image       String?   @db.Text
+  link       String?    @db.Text
+}
+
+model promociones{
+  id          Int       @id @default(autoincrement())
+  image       String?   @db.Text
+  dia      String    @db.VarChar(255)
+}

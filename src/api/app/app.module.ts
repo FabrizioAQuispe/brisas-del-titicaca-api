@@ -32,6 +32,9 @@ import { TomosContenidoModule } from '../tomos-contenido/tomos-contenido.module'
 import { CategoriasModule } from '../categorias/categorias.module';
 import { CategoriasController } from '../categorias/categorias.controller';
 import { CategoriasService } from '../categorias/categorias.service';
+import { PopupModule } from '../popup/popup.module';
+import { PopupController } from '../popup/popup.controller';
+import { PopupService } from '../popup/popup.service';
 
 @Module({
   imports: [
@@ -44,12 +47,13 @@ import { CategoriasService } from '../categorias/categorias.service';
     TomosModule,
     TomosContenidoModule,
     CategoriasModule,
+    PopupModule,
     JwtModule.register({
       secret: 'secretKey',
       signOptions: { expiresIn: '72h' }
     }),
   ],
-  controllers: [AppController,UsuariosController,EventosController,PermisosController,DanzasController,FundadoresController,ComidasController,TomosController,TomosContenidoController,CategoriasController],
-  providers: [AppService,PrismaService, UsuariosService,RolesService,PermisosService,JwtAuthGuard,EventosService,DanzasService,FundadoresService,ComidasService,TomosService,TomosContenidoService,CategoriasService],
+  controllers: [PopupController,AppController,UsuariosController,EventosController,PermisosController,DanzasController,FundadoresController,ComidasController,TomosController,TomosContenidoController,CategoriasController],
+  providers: [PopupService,AppService,PrismaService, UsuariosService,RolesService,PermisosService,JwtAuthGuard,EventosService,DanzasService,FundadoresService,ComidasService,TomosService,TomosContenidoService,CategoriasService],
 })
 export class AppModule {}
