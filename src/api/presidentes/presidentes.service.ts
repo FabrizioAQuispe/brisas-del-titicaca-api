@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../services/prisma.service';
-import { Presidentes } from '../model/PresidentesDTO';
+import { MessagePresidentes, Presidentes } from '../model/PresidentesDTO';
 
 @Injectable()
 export class PresidentesService {
@@ -26,6 +26,25 @@ export class PresidentesService {
             const result = await this.prisma.presidentes.createMany({
                 data: presidentes
             });
+
+            if(!result){
+                throw new Error('ERROR CREATE PRESIDENTS');
+            }
+
+            const response:MessagePresidentes = {
+                code: 201,
+                message: 'SE CREO CON ÉXITO EL PRESIDENTE'
+            }
+
+            const res:MessagePresidentes = {
+                code: 500,
+                message: 'ERROR CREAR PRESIDENTE'   
+            }
+
+            if(!response){
+                return res;
+            }
+            return res;
         } catch (error) {
 
         }

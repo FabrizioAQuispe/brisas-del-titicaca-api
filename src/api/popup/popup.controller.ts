@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { PopupService } from './popup.service';
 import { Popup } from '../model/PopuptDTO';
 import { JwtAuthGuard } from '../utils/Security/JwtService';

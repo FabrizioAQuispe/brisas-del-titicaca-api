@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { PresidentesService } from './presidentes.service';
 import { Presidentes } from '../model/PresidentesDTO';
 
@@ -17,6 +17,13 @@ export class PresidentesController {
         }
     }
 
-    
+    @Post('/create')
+    async createPresidents(@Body() presidentes: Presidentes){
+        try {
+            return this.presidentService.createPresidents(presidentes);
+        } catch (error) {
+            throw new Error('ERROR CONTROLLER' + error.message);
+        }
+    }
 
 }
