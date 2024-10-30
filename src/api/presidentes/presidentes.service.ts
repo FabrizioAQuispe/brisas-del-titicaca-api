@@ -23,19 +23,9 @@ export class PresidentesService {
 
     async createPresidents(presidentes: Presidentes){
         try {
-            const result = await this.prisma.presidentes.create({
+            const response = await this.prisma.presidentes.create({
                 data: presidentes
             });
-
-            if(!result){
-                throw new Error('ERROR CREATE PRESIDENTS');
-            }
-
-            const response:MessagePresidentes = {
-                code: 201,
-                message: 'SE CREO CON ÉXITO EL PRESIDENTE',
-                result: result
-            }
 
             const res:MessagePresidentes = {
                 code: 500,
