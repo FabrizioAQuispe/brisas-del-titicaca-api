@@ -33,12 +33,13 @@ export class PresidentesService {
 
             const response:MessagePresidentes = {
                 code: 201,
-                message: 'SE CREO CON ÉXITO EL PRESIDENTE'
+                message: 'SE CREO CON ÉXITO EL PRESIDENTE',
+                result: result
             }
 
             const res:MessagePresidentes = {
                 code: 500,
-                message: 'ERROR CREAR PRESIDENTE'   
+                message: 'ERROR CREAR PRESIDENTE'   ,
             }
 
             if(!response){

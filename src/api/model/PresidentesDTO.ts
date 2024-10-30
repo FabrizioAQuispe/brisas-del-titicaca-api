@@ -9,5 +9,6 @@ export interface Presidentes {
 
 export interface MessagePresidentes {
     code:number,
-    message:string
+    message:string,
+    result?:any
 }
