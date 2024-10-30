@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { PopupService } from './popup.service';
 import { Popup } from '../model/PopuptDTO';
 import { JwtAuthGuard } from '../utils/Security/JwtService';
@@ -20,7 +20,7 @@ export class PopupController {
     }
 
     @Post('/create')
-    async createPopup(popup: Popup){
+    async createPopup(@Body() popup: Popup){
         try {
             return this.popupService.createPopup(popup);
         } catch (error) {
@@ -28,7 +28,7 @@ export class PopupController {
         }
     }
 
-    @Post('/delete/:idPopup')
+    @Delete('/delete/:idPopup')
     async deletePopup(@Param('idPopup') idPopup:Number){
         try {
             return this.popupService.deletePopup(idPopup);
