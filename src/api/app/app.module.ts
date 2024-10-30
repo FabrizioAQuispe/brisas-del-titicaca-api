@@ -38,6 +38,10 @@ import { PopupService } from '../popup/popup.service';
 import { PresidentesModule } from '../presidentes/presidentes.module';
 import { PresidentesController } from '../presidentes/presidentes.controller';
 import { PresidentesService } from '../presidentes/presidentes.service';
+import path from 'path';
+import { PromocionesModule } from '../promociones/promociones.module';
+import { PromocionesController } from '../promociones/promociones.controller';
+import { PromocionesService } from '../promociones/promociones.service';
 
 @Module({
   imports: [
@@ -52,12 +56,13 @@ import { PresidentesService } from '../presidentes/presidentes.service';
     CategoriasModule,
     PopupModule,
     PresidentesModule,
+    PromocionesModule,
     JwtModule.register({
       secret: 'secretKey',
       signOptions: { expiresIn: '72h' }
     }),
   ],
-  controllers: [PresidentesController,PopupController,AppController,UsuariosController,EventosController,PermisosController,DanzasController,FundadoresController,ComidasController,TomosController,TomosContenidoController,CategoriasController],
-  providers: [PresidentesService,PopupService,AppService,PrismaService, UsuariosService,RolesService,PermisosService,JwtAuthGuard,EventosService,DanzasService,FundadoresService,ComidasService,TomosService,TomosContenidoService,CategoriasService],
+  controllers: [PromocionesController,PresidentesController,PopupController,AppController,UsuariosController,EventosController,PermisosController,DanzasController,FundadoresController,ComidasController,TomosController,TomosContenidoController,CategoriasController],
+  providers: [PromocionesService,PresidentesService,PopupService,AppService,PrismaService, UsuariosService,RolesService,PermisosService,JwtAuthGuard,EventosService,DanzasService,FundadoresService,ComidasService,TomosService,TomosContenidoService,CategoriasService],
 })
 export class AppModule {}
