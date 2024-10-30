@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { PresidentesService } from './presidentes.service';
 import { Presidentes } from '../model/PresidentesDTO';
+import { JwtAuthGuard } from '../utils/Security/JwtService';
 
 @Controller('presidentes')
 export class PresidentesController {
@@ -17,6 +18,7 @@ export class PresidentesController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post('/create')
     async createPresidents(@Body() presidentes: Presidentes){
         try {
@@ -25,7 +27,7 @@ export class PresidentesController {
             throw new Error('ERROR CONTROLLER' + error.message);
         }
     }
-
+    @UseGuards(JwtAuthGuard)
     @Put('/update/:idPresident')
     async updatePresidents(@Param('idPresident') idPresident:number,@Body() presidentes: Presidentes){
         try {
@@ -35,6 +37,7 @@ export class PresidentesController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete('/delete/:idPresident')
     async deletePresident(@Param('idPresident') idPresident:number){  
         try {

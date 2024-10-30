@@ -97,80 +97,80 @@ model talleres {
   @@index([idUser], map: "idUser")
 }
 
-model fundadodres{
-  id                Int       @id @default(autoincrement())
+model fundadodres {
+  id          Int     @id @default(autoincrement())
   imagen      String? @db.Text
-  nombre      String @db.VarChar(255)
-  fecha       String @db.VarChar(255)
-  descripcion Json? 
+  nombre      String  @db.VarChar(255)
+  fecha       String  @db.VarChar(255)
+  descripcion Json?
 }
 
 model danzas {
-  id          Int      @id @default(autoincrement())
-  nombre      Json? 
-  descripcion Json? 
+  id          Int     @id @default(autoincrement())
+  nombre      Json?
+  descripcion Json?
   image       String? @db.Text
   slug        String? @db.Text
+  video       String? @default(dbgenerated("NULL"))
 }
 
 model categorias {
-  id          Int      @id @default(autoincrement())
-  nombre      String   @db.VarChar(255)
-  comidas     comidas[] @relation("CategoriaComidas")
+  id      Int       @id @default(autoincrement())
+  nombre  String    @db.VarChar(255)
+  comidas comidas[] @relation("CategoriaComidas")
 }
 
 model tomos {
-  id          Int               @id @default(autoincrement())
-  titulo      Json? 
-  image       String            @db.Text
-  contenidos  tomos_contenido[] // Relación uno a muchos con tomos_contenido
+  id         Int               @id @default(autoincrement())
+  titulo     Json?
+  image      String            @db.Text
+  contenidos tomos_contenido[] // Relación uno a muchos con tomos_contenido
 }
 
 model tomos_contenido {
-  id          Int      @id @default(autoincrement())
-  titulo      Json? 
-  descripcion Json? 
-  leyenda     Json? 
-  image       String?  @db.Text
-  tomoId      Int      // Clave foránea que apunta a tomos
-  tomo        tomos    @relation(fields: [tomoId], references: [id]) // Relación muchos a uno con tomos
+  id          Int     @id @default(autoincrement())
+  titulo      Json?
+  descripcion Json?
+  leyenda     Json?
+  image       String? @db.Text
+  tomoId      Int // Clave foránea que apunta a tomos
+  tomo        tomos   @relation(fields: [tomoId], references: [id]) // Relación muchos a uno con tomos
 }
 
-
 model comidas {
-  id          Int      @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   idUser      Int
-  nombre      String @db.VarChar(255)
-  descripcion String? @db.Text
-  precio      Float?  @default(0.00) 
+  nombre      String     @db.VarChar(255)
+  descripcion String?    @db.Text
+  precio      Float?     @default(0.00)
   categoriaId Int
-  image       String?  @db.Text
+  image       String?    @db.Text
   categoria   categorias @relation("CategoriaComidas", fields: [categoriaId], references: [id])
 }
 
 model presidentes {
-  id          Int       @id @default(autoincrement())
-  nombre      String    @db.VarChar(255)
-  fecha       String    @db.VarChar(255)
-  descripcion Json?
-  imagePresident       String?   @db.Text
-  imageJunta       String?   @db.Text
+  id             Int     @id @default(autoincrement())
+  nombre         String  @db.VarChar(255)
+  fecha          String  @db.VarChar(255)
+  descripcion    Json?
+  imagePresident String? @db.Text
+  imageJunta     String? @db.Text
 }
 
-model popup{
-  id          Int       @id @default(autoincrement())
-  image       String?   @db.Text
-  link       String?    @db.Text
+model popup {
+  id    Int     @id @default(autoincrement())
+  image String? @db.Text
+  link  String? @db.Text
 }
 
-model promociones{
-  id          Int       @id @default(autoincrement())
-  imageFondo       String?   @db.Text
-  imagePlato       String?   @db.Text
-  dia      String    @db.VarChar(255)
+model promociones {
+  id         Int     @id @default(autoincrement())
+  imageFondo String? @db.Text
+  imagePlato String? @db.Text
+  dia        String  @db.VarChar(255)
 }
 
-model eventos_culturales{
-  id          Int       @id @default(autoincrement())
-  image       String?  @db.Text
+model eventos_culturales {
+  id    Int     @id @default(autoincrement())
+  image String? @db.Text
 }

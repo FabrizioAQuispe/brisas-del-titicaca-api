@@ -38,11 +38,12 @@ import { PopupService } from '../popup/popup.service';
 import { PresidentesModule } from '../presidentes/presidentes.module';
 import { PresidentesController } from '../presidentes/presidentes.controller';
 import { PresidentesService } from '../presidentes/presidentes.service';
-import path from 'path';
 import { PromocionesModule } from '../promociones/promociones.module';
 import { PromocionesController } from '../promociones/promociones.controller';
 import { PromocionesService } from '../promociones/promociones.service';
-
+import { SendemailsService } from '../sendemails/sendemails.service';
+import { SendemailsModule } from '../sendemails/sendemails.module';
+import { SendemailsController } from '../sendemails/sendemails.controller';
 @Module({
   imports: [
     FundadoresModule,
@@ -57,12 +58,13 @@ import { PromocionesService } from '../promociones/promociones.service';
     PopupModule,
     PresidentesModule,
     PromocionesModule,
+    SendemailsModule,
     JwtModule.register({
       secret: 'secretKey',
       signOptions: { expiresIn: '72h' }
     }),
   ],
-  controllers: [PromocionesController,PresidentesController,PopupController,AppController,UsuariosController,EventosController,PermisosController,DanzasController,FundadoresController,ComidasController,TomosController,TomosContenidoController,CategoriasController],
-  providers: [PromocionesService,PresidentesService,PopupService,AppService,PrismaService, UsuariosService,RolesService,PermisosService,JwtAuthGuard,EventosService,DanzasService,FundadoresService,ComidasService,TomosService,TomosContenidoService,CategoriasService],
+  controllers: [SendemailsController,PromocionesController,PresidentesController,PopupController,AppController,UsuariosController,EventosController,PermisosController,DanzasController,FundadoresController,ComidasController,TomosController,TomosContenidoController,CategoriasController],
+  providers: [SendemailsService,PromocionesService,PresidentesService,PopupService,AppService,PrismaService, UsuariosService,RolesService,PermisosService,JwtAuthGuard,EventosService,DanzasService,FundadoresService,ComidasService,TomosService,TomosContenidoService,CategoriasService],
 })
 export class AppModule {}
