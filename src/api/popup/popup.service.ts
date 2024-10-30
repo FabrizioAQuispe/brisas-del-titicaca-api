@@ -32,31 +32,22 @@ export class PopupService {
         }
     }
 
-    async updatePopup(idPopup:number, popup:Popup){
-        try {
-            const res = await this.prisma.popup.findFirst({
+    async updatePopup(idPopup:number,popup:Popup){
+        try{
+            const response = await this.prisma.tomos.update({
                 where: {
-                    id: Number(idPopup),
-                },
-            })
-            if(!res.id){
-                throw new Error('ERROR TO FIND POPUP')
-            }
-
-            const result = await this.prisma.popup.update({
-                where: {
-                    id: Number(res)
+                    id: Number(idPopup)
                 },
                 data: popup
             })
 
-            if(!result.id){
-                throw new Error('ERROR AL ACTUALIZAR POPUP ANTERIOR');
+            if(!response){
+                throw new Error('ERROR FETCH DATA 404');
             }
 
-            return result;
-        } catch (error) {
-            throw new Error('ERROR SERVICE'  + error.message); 
+            return response;
+        }catch(error){
+            throw new Error('ERROR SERVER RESPONSE: '+ error)
         }
     }
 
