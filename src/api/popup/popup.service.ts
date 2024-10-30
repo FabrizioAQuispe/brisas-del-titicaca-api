@@ -34,7 +34,7 @@ export class PopupService {
 
     async updatePopup(idPopup:number,popup:Popup){
         try{
-            const response = await this.prisma.tomos.update({
+            const response = await this.prisma.popup.update({
                 where: {
                     id: Number(idPopup)
                 },
