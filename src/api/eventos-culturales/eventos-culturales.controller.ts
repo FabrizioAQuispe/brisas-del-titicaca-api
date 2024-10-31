@@ -16,7 +16,7 @@ export class EventosCulturalesController {
 
     @UseGuards(JwtAuthGuard)
     @Post('/create')
-    async createEventosCulturales(eventosCulturales: EventosCulturales) {
+    async createEventosCulturales(@Body() eventosCulturales: EventosCulturales) {
         return this.eventosCulturales.createEventosCulturales(eventosCulturales);
     }
 

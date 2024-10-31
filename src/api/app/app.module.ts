@@ -63,12 +63,13 @@ import { EventosCulturalesService } from '../eventos-culturales/eventos-cultural
     PromocionesModule,
     SendemailsModule,
     EventosCulturalesModule,
+    EventosModule,
     JwtModule.register({
       secret: 'secretKey',
       signOptions: { expiresIn: '72h' }
     }),
   ],
-  controllers: [EventosCulturalesController,SendemailsController,PromocionesController,PresidentesController,PopupController,AppController,UsuariosController,EventosController,PermisosController,DanzasController,FundadoresController,ComidasController,TomosController,TomosContenidoController,CategoriasController],
-  providers: [EventosCulturalesService,SendemailsService,PromocionesService,PresidentesService,PopupService,AppService,PrismaService, UsuariosService,RolesService,PermisosService,JwtAuthGuard,EventosService,DanzasService,FundadoresService,ComidasService,TomosService,TomosContenidoService,CategoriasService],
+  controllers: [EventosController,EventosCulturalesController,SendemailsController,PromocionesController,PresidentesController,PopupController,AppController,UsuariosController,EventosController,PermisosController,DanzasController,FundadoresController,ComidasController,TomosController,TomosContenidoController,CategoriasController],
+  providers: [EventosService,EventosCulturalesService,SendemailsService,PromocionesService,PresidentesService,PopupService,AppService,PrismaService, UsuariosService,RolesService,PermisosService,JwtAuthGuard,EventosService,DanzasService,FundadoresService,ComidasService,TomosService,TomosContenidoService,CategoriasService],
 })
 export class AppModule {}
