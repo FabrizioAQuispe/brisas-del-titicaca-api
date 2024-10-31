@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { EventosCulturalesService } from './eventos-culturales.service';
 import { EventosCulturales } from '../model/EventosCulturalesDTO';
 import { JwtAuthGuard } from '../utils/Security/JwtService';
@@ -24,5 +24,11 @@ export class EventosCulturalesController {
     @Put('/update/:id')
     async updateEventosCulturales(@Param('id') id:number,@Body() eventosCulturales:EventosCulturales) {
         return this.eventosCulturales.updateEventosCulturales(id, eventosCulturales);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Delete('/delete/:id')
+    async deleteEventosCulturales(id:number){
+        return this.eventosCulturales.deleteEventosCulturales(id)
     }
 }

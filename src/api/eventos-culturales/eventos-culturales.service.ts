@@ -61,4 +61,22 @@ export class EventosCulturalesService {
             throw new Error('ERROR SERVICE' + error.message)
         }
     }
+
+    async deleteEventosCulturales(id:number){
+        try {
+            const response = await this.prisma.eventos_culturales.delete({
+                where: {
+                    id: Number(id)
+                }
+            })
+
+            if(!response.id){
+                throw new Error('NOT FOUND ID');
+            }
+
+            return response;
+        } catch (error) {
+            throw new Error('ERROR SERVICE' + error.message);
+        }
+    }
 }

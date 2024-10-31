@@ -12,7 +12,7 @@ export class SendemailsService {
         try {
             const response = await this.mailService.sendMail({
                 from: 'Kingsley Okure <alekzander.fabrizio@gmail.com>',
-                to: 'fabrizioquispe1900@gmail.com',
+                to: 'alekzander.fabrizio@gmail.com',
                 subject: 'Enviando desde NestJs',
                 text: message,
             });
