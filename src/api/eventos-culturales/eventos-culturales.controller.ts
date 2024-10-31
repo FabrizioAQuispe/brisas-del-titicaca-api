@@ -28,7 +28,7 @@ export class EventosCulturalesController {
 
     @UseGuards(JwtAuthGuard)
     @Delete('/delete/:id')
-    async deleteEventosCulturales(id:number){
+    async deleteEventosCulturales(@Param('id') id:number){
         return this.eventosCulturales.deleteEventosCulturales(id)
     }
 }
