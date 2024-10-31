@@ -174,3 +174,9 @@ model eventos_culturales {
   id    Int     @id @default(autoincrement())
   image String? @db.Text
 }
+
+
+model talleres_galeria {
+  id    Int     @id @default(autoincrement())
+  image String? @db.Text
+}
