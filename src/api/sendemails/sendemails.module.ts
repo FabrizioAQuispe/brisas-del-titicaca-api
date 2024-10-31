@@ -2,6 +2,10 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { Module } from '@nestjs/common';
 import { SendemailsService } from './sendemails.service';
 import { SendemailsController } from './sendemails.controller';
+import * as dotenv from 'dotenv'
+
+
+dotenv.config();
 
 @Module({
     imports: [

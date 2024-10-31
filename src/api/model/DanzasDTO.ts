@@ -9,6 +9,7 @@ export interface Danzas {
     },
     image: string,
     slug: string
+    video: string | null;
 }
 
 
