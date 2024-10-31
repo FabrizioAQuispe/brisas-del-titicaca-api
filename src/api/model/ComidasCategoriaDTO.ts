@@ -12,8 +12,10 @@ export interface Comidass{
     id?:number,
     idUser:number,
     nombre:string,
-    descripcion?:string,
-    precio?:number,
+    descripcion: {
+        'en': string,
+        'es': string
+    },    precio?:number,
     categoriaId:number,
     image?:string,
 }

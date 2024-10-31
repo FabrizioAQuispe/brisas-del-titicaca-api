@@ -141,7 +141,7 @@ model comidas {
   id          Int        @id @default(autoincrement())
   idUser      Int
   nombre      String     @db.VarChar(255)
-  descripcion String?    @db.Text
+  descripcion Json?
   precio      Float?     @default(0.00)
   categoriaId Int
   image       String?    @db.Text
@@ -174,7 +174,6 @@ model eventos_culturales {
   id    Int     @id @default(autoincrement())
   image String? @db.Text
 }
-
 
 model talleres_galeria {
   id    Int     @id @default(autoincrement())
