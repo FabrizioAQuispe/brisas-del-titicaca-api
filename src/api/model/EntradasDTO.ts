@@ -6,7 +6,9 @@ export interface Categorias {
 export interface Comidas {
     idUser: number;
     nombre: string;         // Agregado para el nombre de la comida
-    descripcion?: string;   // Agregado como opcional
-    precio?: number;        // Agregado como opcional
+    descripcion: {
+        'en': string,
+        'es': string
+    },    precio?: number;        // Agregado como opcional
     categoriaId: number;
 }

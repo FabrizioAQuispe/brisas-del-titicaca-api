@@ -99,7 +99,7 @@ export class ComidasService {
      * @throws Will throw an error if the comida could not be created.
      * @throws Will throw a server internal error if an unexpected error occurs.
      */
-    async createComidas(comidas:Comidas){
+    async createComidas(comidas:Comidass){
         try{
             const response = await this.prisma.comidas.create({
                 data: comidas
