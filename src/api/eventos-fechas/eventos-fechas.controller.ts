@@ -38,7 +38,7 @@ export class EventosFechasController {
             console.log(response)
             return response;
         } catch (error) {
-            throw new Error('ERROR CONTROLLER');
+            throw new Error('ERROR CONTROLLER' + error);
         }
     }
 
