@@ -68,8 +68,20 @@ model eventos {
   slug           String?   @db.Text
   bg_color       String?   @default("000") @db.VarChar(10)
   user           user?     @relation(fields: [idUser], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "eventos_ibfk_1")
+  tipo           Int?      
+  fechas         eventos_fechas[] @relation("EventoFechas")
 
   @@index([idUser], map: "idUser")
+}
+
+model eventos_fechas {
+  id              Int       @id @default(autoincrement())
+  fecha_creacion  DateTime? @db.Date
+  eventoId        Int
+
+  evento          eventos   @relation("EventoFechas", fields: [eventoId], references: [id])
+
+  @@index([eventoId], map: "eventoId_index")
 }
 
 model noticias {

@@ -15,8 +15,7 @@ export class UsuariosController {
         private usuarioService: UsuariosService
     ) { }
 
-    @UseGuards(JwtAuthGuard,RolesGuard)
-    @PermisosDecorator([{nombre: 'ver.eventos'}])
+    @UseGuards(JwtAuthGuard)
     @Get('/searchuser/:id')
     async getSearchUser(@Param('id') id: number) {
         return this.usuarioService.getSearchUser(id);

@@ -50,6 +50,9 @@ import { EventosCulturalesService } from '../eventos-culturales/eventos-cultural
 import { TalleresModule } from '../talleres/talleres.module';
 import { TalleresController } from '../talleres/talleres.controller';
 import { TalleresService } from '../talleres/talleres.service';
+import { EventosFechasModule } from '../eventos-fechas/eventos-fechas.module';
+import { EventosFechasController } from '../eventos-fechas/eventos-fechas.controller';
+import { EventosFechasService } from '../eventos-fechas/eventos-fechas.service';
 @Module({
   imports: [
     FundadoresModule,
@@ -68,12 +71,13 @@ import { TalleresService } from '../talleres/talleres.service';
     EventosCulturalesModule,
     EventosModule,
     TalleresModule,
+    EventosFechasModule,
     JwtModule.register({
       secret: 'secretKey',
       signOptions: { expiresIn: '72h' }
     }),
   ],
-  controllers: [TalleresController,EventosController,EventosCulturalesController,SendemailsController,PromocionesController,PresidentesController,PopupController,AppController,UsuariosController,EventosController,PermisosController,DanzasController,FundadoresController,ComidasController,TomosController,TomosContenidoController,CategoriasController],
-  providers: [TalleresService,EventosService,EventosCulturalesService,SendemailsService,PromocionesService,PresidentesService,PopupService,AppService,PrismaService, UsuariosService,RolesService,PermisosService,JwtAuthGuard,EventosService,DanzasService,FundadoresService,ComidasService,TomosService,TomosContenidoService,CategoriasService],
+  controllers: [EventosFechasController,TalleresController,EventosController,EventosCulturalesController,SendemailsController,PromocionesController,PresidentesController,PopupController,AppController,UsuariosController,EventosController,PermisosController,DanzasController,FundadoresController,ComidasController,TomosController,TomosContenidoController,CategoriasController],
+  providers: [EventosFechasService,TalleresService,EventosService,EventosCulturalesService,SendemailsService,PromocionesService,PresidentesService,PopupService,AppService,PrismaService, UsuariosService,RolesService,PermisosService,JwtAuthGuard,EventosService,DanzasService,FundadoresService,ComidasService,TomosService,TomosContenidoService,CategoriasService],
 })
 export class AppModule {}
