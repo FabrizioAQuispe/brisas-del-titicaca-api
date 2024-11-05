@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../services/prisma.service';
 import { EventosFechas } from '../model/EventosFechaDTO';
+import { Eventos } from '../model/EventosDTO';
 
 @Injectable()
 export class EventosFechasService {
@@ -21,16 +22,16 @@ export class EventosFechasService {
     }
     async getEventosFecha() {
         try {
-            const response = await this.prisma.eventos_fechas.findMany()
+            const response = await this.prisma.eventos.findMany()
             return response;
         } catch (error) {
             throw new Error('ERROR SERVER RESPONSE' + error);
         }
     }
 
-    async createEventosFecha(eventosFechas: EventosFechas) {
+    async createEventosFecha(eventosFechas: Eventos) {
         try {
-            const response = await this.prisma.eventos_fechas.create({
+            const response = await this.prisma.eventos.create({
                 data: eventosFechas
             })
             return response;
@@ -39,16 +40,16 @@ export class EventosFechasService {
         }
     }
 
-    async updateEventosFecha(id: number, eventosFechas: EventosFechas) {
+    async updateEventosFecha(id: number, eventosFechas: Eventos) {
         try {
-            const response = await this.prisma.eventos_fechas.update({
+            const response = await this.prisma.eventos.update({
                 where: {
                     id: Number(id)
                 },
                 data: eventosFechas
             })
 
-            if(!response.eventoId){
+            if(!response){
                 throw new Error('NO SE ENCONTRO EL ID DEL EVENTO');
             }
 
@@ -60,13 +61,13 @@ export class EventosFechasService {
 
     async deleteEventosFechas(eventoId:number){
         try {
-            const response = await this.prisma.eventos_fechas.delete({
+            const response = await this.prisma.eventos.delete({
                 where: {
                     id: Number(eventoId)
                 }
             })
 
-            if(!response.eventoId){
+            if(!response){
                 throw new Error('NO SE ENCONTRO EL ID DEL EVENTO');
             }
             return response;

@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nes
 import { EventosFechasService } from './eventos-fechas.service';
 import { EventosFechas } from '../model/EventosFechaDTO';
 import { JwtAuthGuard } from '../utils/Security/JwtService';
+import { Eventos } from '../model/EventosDTO';
 
 @Controller('eventos-fechas')
 export class EventosFechasController {
@@ -31,7 +32,7 @@ export class EventosFechasController {
 
     @UseGuards(JwtAuthGuard)
     @Post('/eventos-fechas/create')
-    async createEventosFecha(@Body() eventosFechas: EventosFechas){
+    async createEventosFecha(@Body() eventosFechas: Eventos){
         try {
             const response = await this.eventosFechaService.createEventosFecha(eventosFechas);
             return response;
@@ -42,9 +43,9 @@ export class EventosFechasController {
 
     @UseGuards(JwtAuthGuard)
     @Put('/eventos-fechas/update/:id')
-    async updateEventosFecha(eventosFechas: EventosFechas) {
+    async updateEventosFecha(id:number,eventosFechas: Eventos) {
         try {
-            const response = await this.eventosFechaService.updateEventosFecha(eventosFechas.id, eventosFechas);
+            const response = await this.eventosFechaService.updateEventosFecha(id, eventosFechas);
             return response;
         } catch (error) {
             throw new Error('ERROR CONTROLLER');
