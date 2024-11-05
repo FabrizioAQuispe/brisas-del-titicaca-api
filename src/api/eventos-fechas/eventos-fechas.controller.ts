@@ -20,7 +20,7 @@ export class EventosFechasController {
         }
     }
 
-    @Get('/eventos-fechas/:nombre')
+    @Get('/search/:nombre')
     async getEventosFechaNombre(@Param('nombre') fecha:string){
         try {
             const response = await this.eventosFechaService.getEventosFechaNombre(fecha);
@@ -31,7 +31,7 @@ export class EventosFechasController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Post('/eventos-fechas/create')
+    @Post('/create')
     async createEventosFecha(@Body() eventosFechas: Eventos){
         try {
             const response = await this.eventosFechaService.createEventosFecha(eventosFechas);
@@ -42,7 +42,7 @@ export class EventosFechasController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Put('/eventos-fechas/update/:id')
+    @Put('/update/:id')
     async updateEventosFecha(id:number,eventosFechas: Eventos) {
         try {
             const response = await this.eventosFechaService.updateEventosFecha(id, eventosFechas);
@@ -53,7 +53,7 @@ export class EventosFechasController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Delete('/eventos-fechas/delete/:id')
+    @Delete('/delete/:id')
     async deleteEventosFechas(@Param('id') eventoId:number){
         return this.eventosFechaService.deleteEventosFechas(eventoId);
     }
