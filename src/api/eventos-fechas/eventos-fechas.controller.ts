@@ -4,7 +4,7 @@ import { EventosFechas } from '../model/EventosFechaDTO';
 import { JwtAuthGuard } from '../utils/Security/JwtService';
 import { Eventos } from '../model/EventosDTO';
 
-@Controller('eventos-fechas')
+@Controller('eventosjoinuss')
 export class EventosFechasController {
     constructor(
         private eventosFechaService: EventosFechasService
@@ -30,11 +30,12 @@ export class EventosFechasController {
         }
     }
 
-    @UseGuards(JwtAuthGuard)
-    @Post('/create')
+    // @UseGuards(JwtAuthGuard)
+    @Post('/createevento')
     async createEventosFecha(@Body() eventosFechas: Eventos){
         try {
             const response = await this.eventosFechaService.createEventosFecha(eventosFechas);
+            console.log(response)
             return response;
         } catch (error) {
             throw new Error('ERROR CONTROLLER');
