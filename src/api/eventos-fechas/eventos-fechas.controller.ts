@@ -9,7 +9,7 @@ export class EventosFechasController {
         private eventosFechaService: EventosFechasService
     ){}
 
-    @Get('/eventos-fechas')
+    @Get('/list')
     async getEventosFecha() {
         try {
             const response = await this.eventosFechaService.getEventosFecha();
