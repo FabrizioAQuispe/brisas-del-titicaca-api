@@ -90,7 +90,7 @@ model paquetes {
   eventoId    Int
   nombre      String? @db.VarChar(255)
   image       String? @db.Text
-  precio      Float?
+  precio      Json?
   descripcion String? @db.VarChar(255)
   evento eventos @relation("EventosPaquetes", fields: [eventoId], references: [id])
 }

@@ -22,7 +22,11 @@ export class EventosFechasService {
     }
     async getEventosFecha() {
         try {
-            const response = await this.prisma.eventos.findMany()
+            const response = await this.prisma.eventos.findMany({
+                include: {
+                    paquetes: true
+                }
+            })
             return response;
         } catch (error) {
             throw new Error('ERROR SERVER RESPONSE' + error);
@@ -48,6 +52,9 @@ export class EventosFechasService {
                         tipo: 1
                     },
                 ]
+                },
+                include: {
+                    paquetes: true
                 }
             })
 
@@ -62,6 +69,9 @@ export class EventosFechasService {
                         tipo: 2
                     },
                 ]
+                },
+                include: {
+                    paquetes: true
                 }
             })
 
