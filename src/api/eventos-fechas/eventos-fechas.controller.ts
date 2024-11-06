@@ -55,7 +55,7 @@ export class EventosFechasController {
 
     @UseGuards(JwtAuthGuard)
     @Put('/update/:id')
-    async updateEventosFecha(id:number,eventosFechas: Eventos) {
+    async updateEventosFecha(@Param('id') id:number,@Body() eventosFechas: Eventos) {
         try {
             const response = await this.eventosFechaService.updateEventosFecha(id, eventosFechas);
             return response;
