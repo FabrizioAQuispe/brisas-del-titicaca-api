@@ -58,30 +58,41 @@ model usuarios_roles {
 
 model eventos {
   idUser         Int?
-  id             Int       @id @default(autoincrement())
-  nombre         String?   @db.VarChar(255)
-  descripcion    String?   @db.VarChar(255)
-  image          String?   @db.VarChar(500)
-  fecha_creacion DateTime? @db.Date
-  fecha_edicion  DateTime? @db.Date
+  id             Int              @id @default(autoincrement())
+  nombre         String?          @db.VarChar(255)
+  descripcion    String?          @db.VarChar(255)
+  image          String?          @db.VarChar(500)
+  fecha_creacion DateTime?        @db.Date
+  fecha_edicion  DateTime?        @db.Date
   precio         Float?
-  slug           String?   @db.Text
-  bg_color       String?   @default("000") @db.VarChar(10)
-  user           user?     @relation(fields: [idUser], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "eventos_ibfk_1")
-  tipo           Int?      
+  slug           String?          @db.Text
+  bg_color       String?          @default("000") @db.VarChar(10)
+  user           user?            @relation(fields: [idUser], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "eventos_ibfk_1")
+  tipo           Int?
   fechas         eventos_fechas[] @relation("EventoFechas")
+  paquetes       paquetes[] @relation("EventosPaquetes")
 
   @@index([idUser], map: "idUser")
 }
 
 model eventos_fechas {
-  id              Int       @id @default(autoincrement())
-  fecha_creacion  DateTime? @db.Date
-  eventoId        Int
+  id             Int       @id @default(autoincrement())
+  fecha_creacion DateTime? @db.Date
+  eventoId       Int
 
-  evento          eventos   @relation("EventoFechas", fields: [eventoId], references: [id])
+  evento eventos @relation("EventoFechas", fields: [eventoId], references: [id])
 
   @@index([eventoId], map: "eventoId_index")
+}
+
+model paquetes {
+  id          Int     @id @default(autoincrement())
+  eventoId    Int
+  nombre      String? @db.VarChar(255)
+  image       String? @db.Text
+  precio      Float?
+  descripcion String? @db.VarChar(255)
+  evento eventos @relation("EventosPaquetes", fields: [eventoId], references: [id])
 }
 
 model noticias {
