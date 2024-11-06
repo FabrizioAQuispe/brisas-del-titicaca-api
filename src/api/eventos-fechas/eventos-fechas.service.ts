@@ -29,6 +29,51 @@ export class EventosFechasService {
         }
     }
 
+    async getEventosFechaFiltro(){
+        try {
+            const fechaActual = new Date();
+            const mesActual = fechaActual.getMonth() + 1;
+            const anioActual = fechaActual.getFullYear();
+
+            const fechaInicio = new Date(anioActual,mesActual -1 , 1);
+
+            const nuestros = await this.prisma.eventos.findMany({
+                where: {
+                    AND: [{
+                        fecha_creacion: {
+                            gte: fechaInicio
+                        }
+                    },
+                    {
+                        tipo: 1
+                    },
+                ]
+                }
+            })
+
+            const externos = await this.prisma.eventos.findMany({
+                where: {
+                    AND: [{
+                        fecha_creacion: {
+                            gte: fechaInicio
+                        }
+                    },
+                    {
+                        tipo: 2
+                    },
+                ]
+                }
+            })
+
+            return {
+                nuestros,
+                externos
+            };
+        } catch (error) {
+            throw new Error('ERROR SERVICE ERROR' + error);
+        }
+    }
+
     async createEventosFecha(eventosFechas: Eventos) {
         try {
             const response = await this.prisma.eventos.create({

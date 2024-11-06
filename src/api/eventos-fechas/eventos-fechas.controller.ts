@@ -10,6 +10,17 @@ export class EventosFechasController {
         private eventosFechaService: EventosFechasService
     ){}
 
+    @Get('/list/filter')
+    async getEventosFechaFiltro(){
+        try {
+            const response = await this.eventosFechaService.getEventosFechaFiltro();
+            console.log(response)
+            return response;
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
     @Get('/list')
     async getEventosFecha() {
         try {
