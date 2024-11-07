@@ -9,6 +9,37 @@ export class EventosFechasService {
         private prisma: PrismaService
     ) { }
 
+    async getOnlyEventosExternos(){
+        try {
+            const fechaActual = new Date();
+            const mesActual = fechaActual.getMonth() + 1;
+            const anioActual = fechaActual.getFullYear();
+
+            const fechaInicio = new Date(anioActual,mesActual -1 , 1);
+
+            const externos = await this.prisma.eventos.findMany({
+                where: {
+                    AND: [{
+                        fecha_creacion: {
+                            gte: fechaInicio
+                        }
+                    },
+                    {
+                        tipo: 2
+                    },
+                ]
+                },
+                include: {
+                    paquetes: true
+                }
+            })
+
+            return externos
+        } catch (error) {
+            throw new Error('ERROR SERVICE' + error);
+        }
+    }
+
     async getEventosFechaNombre(fecha:string){
         try {
             const response = await this.prisma.eventos_fechas.findFirst({

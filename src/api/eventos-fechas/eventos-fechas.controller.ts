@@ -10,6 +10,15 @@ export class EventosFechasController {
         private eventosFechaService: EventosFechasService
     ){}
 
+    @Get('/list/externos')
+    async getOnlyEventosExternos(){
+        try {
+            return await this.eventosFechaService.getOnlyEventosExternos();
+        } catch (error) {
+            throw new Error('ERROR CONTROLLER' + error);
+        }
+    }
+
     @Get('/list/filter')
     async getEventosFechaFiltro(){
         try {
