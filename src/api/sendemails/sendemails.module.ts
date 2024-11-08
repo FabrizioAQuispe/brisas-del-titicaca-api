@@ -15,8 +15,8 @@ dotenv.config();
                 port: 587,
                 secure: false,
                 auth: {
-                    user: process.env.EMAIL_USERNAME,
-                    pass: process.env.EMAIL_PASSWORD,
+                    user: process.env.EMAIL_USERNAME || 'alekzander.fabrizio@gmail.com',
+                    pass: process.env.EMAIL_PASSWORD || 'vurb bpca rihd tgcl',
                 },
             }
         })

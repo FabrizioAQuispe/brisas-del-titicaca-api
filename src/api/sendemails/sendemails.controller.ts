@@ -13,10 +13,11 @@ export class SendemailsController {
 
         try {
             const response = await this.sendemailsService.sendMail(messageSend, fromSend, toSend, subjectSend);
+            console.log(response)
             return { message: 'Correo enviado (verifica la consola para más detalles)' };
         } catch (error) {
             console.error('Error al enviar correo:', error);
-            return { message: 'No se pudo enviar el correo', error: error.message };
+            return error;
         }
     }
 

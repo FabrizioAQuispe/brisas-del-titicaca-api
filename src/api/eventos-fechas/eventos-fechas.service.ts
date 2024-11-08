@@ -47,6 +47,7 @@ export class EventosFechasService {
                     fecha_creacion: fecha
                 }
             })
+            return response;
         } catch (error) {
             throw new Error('ERROR SERVER RESPONSE');
         }
@@ -117,6 +118,7 @@ export class EventosFechasService {
 
     async createEventosFecha(eventosFechas: Eventos) {
         try {
+            console.log(eventosFechas)
             const response = await this.prisma.eventos.create({
                 data: eventosFechas
             })
