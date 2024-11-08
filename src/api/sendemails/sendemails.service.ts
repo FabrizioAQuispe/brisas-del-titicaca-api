@@ -18,7 +18,7 @@ export class SendemailsService {
             //     "ventasyeventos@brisasdeltiticaca.com",
             //     "ventas3@brisasdeltiticaca.com"
             // ]
-            const randomEmails = [
+            /* const randomEmails = [
                 {
                     eventos_externos: [
                         "wramirez@brisasdeltiticaca.com",
@@ -32,18 +32,37 @@ export class SendemailsService {
                         "fabrizioquispe1900@gmail.com"
                     ]
                 },
-            ];
+            ]; */
 
+            var randomEmails = []
 
-            const randomNames = Math.floor(Math.random() * randomEmails[type].length);
+            if (type == 'puquina') {
+                randomEmails.push(
+                    "fabrizioquispe1900@gmail.com"
+                )
+            }
+            else {
+                randomEmails.push(
+                    "wramirez@brisasdeltiticaca.com",
+                    "fabrizioquispe1900@gmail.com",
+                    "luis05medina22@gmail.com",
+                    /* "sistemas@brisasdeltiticaca.com" */
+                )
+            }
+
+            console.log(randomEmails)
+
+            const randomNames = Math.floor(Math.random() * randomEmails.length);
 
             const response = await this.mailService.sendMail({
                 from: process.env.EMAIL_USERNAME,
-                to: randomEmails[type][randomNames],
+                to: randomEmails[randomNames],
                 subject: subjectSend,
                 html: messageSend
             });
             console.log('Correo enviado:', response);
+
+            return true;
         } catch (error) {
             console.error('Error al enviar correo:', error);
             throw new Error('No se pudo enviar el correo.'); // Lanza un error para manejarlo más arriba si es necesario
