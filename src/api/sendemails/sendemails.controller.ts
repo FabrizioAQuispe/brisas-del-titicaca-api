@@ -8,11 +8,11 @@ export class SendemailsController {
     ) {}
     
     @Post('/send')
-    async sendEmail(@Body() body: { messageSend: string; fromSend: string; toSend: string; subjectSend: string }) {
-        const { messageSend, fromSend, toSend, subjectSend } = body;
+    async sendEmail(@Body() body: { messageSend: string;  subjectSend: string }) {
+        const { messageSend, subjectSend } = body;
 
         try {
-            const response = await this.sendemailsService.sendMail(messageSend, fromSend, toSend, subjectSend);
+            const response = await this.sendemailsService.sendMail(messageSend, subjectSend);
             console.log(response)
             return { message: 'Correo enviado (verifica la consola para más detalles)' };
         } catch (error) {
