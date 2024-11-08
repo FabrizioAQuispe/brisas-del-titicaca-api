@@ -4,31 +4,42 @@ import { MailerService } from '@nestjs-modules/mailer';
 @Injectable()
 export class SendemailsService {
     constructor(
-        private  readonly mailService: MailerService
-    ){}
+        private readonly mailService: MailerService
+    ) { }
 
-    async sendMail(messageSend: string,  subjectSend: string) {
+    async sendMail(messageSend: string, subjectSend: string, type: string) {
         // Validaciones básicas
         if (!messageSend || !subjectSend) {
             throw new Error('Todos los campos son obligatorios.');
         }
-    
+
         try {
             // const randomEmails = [
             //     "ventasyeventos@brisasdeltiticaca.com",
             //     "ventas3@brisasdeltiticaca.com"
             // ]
             const randomEmails = [
-                "wramirez@brisasdeltiticaca.com",
-                "fabrizioquispe1900@gmail.com",
-                "luis05medina22@gmail.com"
-            ]
+                {
+                    eventos_externos: [
+                        "wramirez@brisasdeltiticaca.com",
+                        "fabrizioquispe1900@gmail.com",
+                        "luis05medina22@gmail.com",
+                        "sistemas@brisasdeltiticaca.com"
+                    ]
+                }, {
+                    puquina: [
+                        // "salon@brisasdeltiticaca.com",
+                        "fabrizioquispe1900@gmail.com"
+                    ]
+                },
+            ];
 
-            const randomNames = Math.floor(Math.random() * randomEmails.length);
+
+            const randomNames = Math.floor(Math.random() * randomEmails[type].length);
 
             const response = await this.mailService.sendMail({
                 from: process.env.EMAIL_USERNAME,
-                to: randomEmails[randomNames],
+                to: randomEmails[type][randomNames],
                 subject: subjectSend,
                 html: messageSend
             });
