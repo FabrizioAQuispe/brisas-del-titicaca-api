@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../services/prisma.service';
 import { TalleresCulturales } from '../model/TalleresCulturaleDTO';
+import { TalleresCategoria } from '../model/TalleresCategoriaDTO';
 
 @Injectable()
 export class TalleresService {
@@ -8,7 +9,41 @@ export class TalleresService {
         private prisma: PrismaService
     ) { }
 
-    async getTalleresWithCategoria(){
+    async updateCategoria(idTallerrCategoria: number, talleresCategoria: TalleresCategoria) {
+        try {
+            const response = await this.prisma.categorias_talleres.findFirst({
+                where: {
+                    id: Number(idTallerrCategoria)
+                }
+            })
+
+            if(!response.id){
+                throw new Error('NOT FOUND ID CATEGORY TALLER');
+            }
+
+            const result = await this.prisma.categorias_talleres.update({
+                where:{
+                    id: Number(response.id)
+                },
+                data: talleresCategoria
+            })
+        } catch (error) {
+            throw new Error('ERROR SERVICE' + error);
+        }
+    }
+    async createCategoria(talleresCateogria: TalleresCategoria) {
+        try {
+            const response = await this.prisma.categorias_talleres.create({
+                data: talleresCateogria
+            })
+
+            return response;
+        } catch (error) {
+            throw new Error('ERROR SERVICE' + error);
+        }
+    }
+
+    async getTalleresWithCategoria() {
         try {
             const response = await this.prisma.categorias_talleres.findMany({
                 include: {
@@ -16,7 +51,7 @@ export class TalleresService {
                 }
             })
 
-            if(!response){
+            if (!response) {
                 throw new Error('ERROR RESPONSE DATA');
             }
 

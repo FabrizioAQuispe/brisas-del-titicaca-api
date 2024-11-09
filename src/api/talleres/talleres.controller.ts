@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nes
 import { TalleresCulturales } from '../model/TalleresCulturaleDTO';
 import { TalleresService } from './talleres.service';
 import { JwtAuthGuard } from '../utils/Security/JwtService';
+import { TalleresCategoria } from '../model/TalleresCategoriaDTO';
 
 @Controller('talleres')
 export class TalleresController {
@@ -9,6 +10,16 @@ export class TalleresController {
         private talleresService:TalleresService
     ){}
 
+    @UseGuards(JwtAuthGuard)
+    @Put('/update/categoria/:id')
+    async updateCategoria(@Param('id') idTallerrCategoria: number,@Body() talleresCategoria: TalleresCategoria) {
+        return await this.talleresService.updateCategoria(idTallerrCategoria, talleresCategoria)
+    }
+    @UseGuards(JwtAuthGuard)
+    @Post('/create/categoria')
+    async createCategoria(@Body() talleresCateogria:TalleresCategoria){
+        return await this.talleresService.createCategoria(talleresCateogria)
+    }
     @Get('/list/categoria')
     async getTalleresWithCategoria(){
         try {
