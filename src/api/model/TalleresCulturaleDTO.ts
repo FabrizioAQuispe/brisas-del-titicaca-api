@@ -1,4 +1,5 @@
 export interface TalleresCulturales{
     id:number,
-    image:string
+    image:string,
+    categorias_talleresId:number
 }
