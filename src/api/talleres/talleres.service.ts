@@ -8,6 +8,26 @@ export class TalleresService {
         private prisma: PrismaService
     ) { }
 
+    async getTalleresWithCategoria(){
+        try {
+            const response = await this.prisma.categorias_talleres.findFirst({
+                include: {
+                    talleres: true
+                }
+            })
+
+            if(!response){
+                throw new Error('ERROR RESPONSE DATA');
+            }
+
+            const result = await response;
+            console.log(response)
+            return await result;
+        } catch (error) {
+            throw new Error('ERROR SERVICE' + error);
+        }
+    }
+
     async getTalleres() {
         try {
             const response = await this.prisma.talleres_galeria.findMany()

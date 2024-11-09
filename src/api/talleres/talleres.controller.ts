@@ -8,6 +8,16 @@ export class TalleresController {
     constructor(
         private talleresService:TalleresService
     ){}
+
+    @Get('/list/categoria')
+    async getTalleresWithCategoria(){
+        try {
+            const response = await this.talleresService.getTalleresWithCategoria();
+            return response
+        } catch (error) {
+            throw new Error('ERROR CONTROLLER' + error);
+        }
+    }
     @Get('/list')
     async getTalleres() {
         return this.talleresService.getTalleres();

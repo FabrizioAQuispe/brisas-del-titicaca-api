@@ -116,7 +116,6 @@ model talleres {
   fecha_creacion    DateTime? @db.Date
   fecha_edicion     DateTime? @db.Date
   user              user?     @relation(fields: [idUser], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "talleres_ibfk_1")
-
   @@index([idUser], map: "idUser")
 }
 
@@ -141,6 +140,12 @@ model categorias {
   id      Int       @id @default(autoincrement())
   nombre  String    @db.VarChar(255)
   comidas comidas[] @relation("CategoriaComidas")
+}
+
+model categorias_talleres {
+  id      Int       @id @default(autoincrement())
+  categoria  String    @db.VarChar(255)
+  talleres talleres_galeria[] @relation("CategoriaTalleres")
 }
 
 model tomos {
@@ -201,4 +206,7 @@ model eventos_culturales {
 model talleres_galeria {
   id    Int     @id @default(autoincrement())
   image String? @db.Text
+  categorias_taller   categorias_talleres? @relation("CategoriaTalleres", fields: [categorias_talleresId], references: [id])
+  categorias_talleresId Int?
+
 }
