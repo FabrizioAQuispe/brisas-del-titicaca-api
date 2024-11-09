@@ -10,7 +10,7 @@ export class TalleresService {
 
     async getTalleresWithCategoria(){
         try {
-            const response = await this.prisma.categorias_talleres.findFirst({
+            const response = await this.prisma.categorias_talleres.findMany({
                 include: {
                     talleres: true
                 }
@@ -20,9 +20,7 @@ export class TalleresService {
                 throw new Error('ERROR RESPONSE DATA');
             }
 
-            const result = await response;
-            console.log(response)
-            return await result;
+            return response
         } catch (error) {
             throw new Error('ERROR SERVICE' + error);
         }
