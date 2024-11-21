@@ -42,12 +42,19 @@ export class SendemailsService {
                 )
             }
             else {
-                randomEmails.push(
-                    "wramirez@brisasdeltiticaca.com",
-                    "fabrizioquispe1900@gmail.com",
-                    "luis05medina22@gmail.com",
-                    /* "sistemas@brisasdeltiticaca.com" */
-                )
+                if (type == 'reclamaciones') {
+                    randomEmails.push(
+                        "fabrizioquispe1900@gmail.com"
+                    )
+                }
+                else {
+                    randomEmails.push(
+                        "wramirez@brisasdeltiticaca.com",
+                        "fabrizioquispe1900@gmail.com",
+                        "luis05medina22@gmail.com",
+                        /* "sistemas@brisasdeltiticaca.com" */
+                    )
+                }
             }
 
             console.log(randomEmails)
