@@ -67,10 +67,10 @@ model eventos {
   precio         Float?
   slug           String?          @db.Text
   bg_color       String?          @default("000") @db.VarChar(10)
-  user           user?            @relation(fields: [idUser], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "eventos_ibfk_1")
   tipo           Int?
+  user           user?            @relation(fields: [idUser], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "eventos_ibfk_1")
   fechas         eventos_fechas[] @relation("EventoFechas")
-  paquetes       paquetes[] @relation("EventosPaquetes")
+  paquetes       paquetes[]       @relation("EventosPaquetes")
 
   @@index([idUser], map: "idUser")
 }
@@ -79,8 +79,7 @@ model eventos_fechas {
   id             Int       @id @default(autoincrement())
   fecha_creacion DateTime? @db.Date
   eventoId       Int
-
-  evento eventos @relation("EventoFechas", fields: [eventoId], references: [id])
+  evento         eventos   @relation("EventoFechas", fields: [eventoId], references: [id])
 
   @@index([eventoId], map: "eventoId_index")
 }
@@ -92,7 +91,9 @@ model paquetes {
   image       String? @db.Text
   precio      Json?
   descripcion String? @db.VarChar(255)
-  evento eventos @relation("EventosPaquetes", fields: [eventoId], references: [id])
+  evento      eventos @relation("EventosPaquetes", fields: [eventoId], references: [id])
+
+  @@index([eventoId], map: "paquetes_eventoId_fkey")
 }
 
 model noticias {
@@ -116,6 +117,7 @@ model talleres {
   fecha_creacion    DateTime? @db.Date
   fecha_edicion     DateTime? @db.Date
   user              user?     @relation(fields: [idUser], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "talleres_ibfk_1")
+
   @@index([idUser], map: "idUser")
 }
 
@@ -133,26 +135,27 @@ model danzas {
   descripcion Json?
   image       String? @db.Text
   slug        String? @db.Text
-  video       String? @default(dbgenerated("NULL"))
+  video       String?
 }
 
 model categorias {
   id      Int       @id @default(autoincrement())
   nombre  String    @db.VarChar(255)
+  orden   Int?      @default(100)
   comidas comidas[] @relation("CategoriaComidas")
 }
 
 model categorias_talleres {
-  id      Int       @id @default(autoincrement())
-  categoria  String    @db.VarChar(255)
-  talleres talleres_galeria[] @relation("CategoriaTalleres")
+  id        Int                @id @default(autoincrement())
+  categoria String             @db.VarChar(255)
+  talleres  talleres_galeria[] @relation("CategoriaTalleres")
 }
 
 model tomos {
   id         Int               @id @default(autoincrement())
   titulo     Json?
   image      String            @db.Text
-  contenidos tomos_contenido[] // Relación uno a muchos con tomos_contenido
+  contenidos tomos_contenido[]
 }
 
 model tomos_contenido {
@@ -161,19 +164,24 @@ model tomos_contenido {
   descripcion Json?
   leyenda     Json?
   image       String? @db.Text
-  tomoId      Int // Clave foránea que apunta a tomos
-  tomo        tomos   @relation(fields: [tomoId], references: [id]) // Relación muchos a uno con tomos
+  tomoId      Int
+  tomo        tomos   @relation(fields: [tomoId], references: [id])
+
+  @@index([tomoId], map: "tomos_contenido_tomoId_fkey")
 }
 
 model comidas {
   id          Int        @id @default(autoincrement())
   idUser      Int
-  nombre      String     @db.VarChar(255)
-  descripcion Json?
-  precio      Float?     @default(0.00)
   categoriaId Int
+  nombre      String     @db.VarChar(255)
+  precio      Float?     @default(0)
   image       String?    @db.Text
+  descripcion Json?
+  orden       Int?       @default(100)
   categoria   categorias @relation("CategoriaComidas", fields: [categoriaId], references: [id])
+
+  @@index([categoriaId], map: "comidas_categoriaId_fkey")
 }
 
 model presidentes {
@@ -193,9 +201,9 @@ model popup {
 
 model promociones {
   id         Int     @id @default(autoincrement())
+  dia        String  @db.VarChar(255)
   imageFondo String? @db.Text
   imagePlato String? @db.Text
-  dia        String  @db.VarChar(255)
 }
 
 model eventos_culturales {
@@ -204,9 +212,21 @@ model eventos_culturales {
 }
 
 model talleres_galeria {
-  id    Int     @id @default(autoincrement())
-  image String? @db.Text
-  categorias_taller   categorias_talleres? @relation("CategoriaTalleres", fields: [categorias_talleresId], references: [id])
+  id                    Int                  @id @default(autoincrement())
+  image                 String?              @db.Text
   categorias_talleresId Int?
+  categorias_taller     categorias_talleres? @relation("CategoriaTalleres", fields: [categorias_talleresId], references: [id])
 
+  @@index([categorias_talleresId], map: "talleres_galeria_categorias_talleresId_fkey")
+}
+
+model correos {
+  id          Int     @id @default(autoincrement())
+  nombre      String? @db.VarChar(255)
+  telefono    String?
+  correo      String?
+  descripcion String?
+  documento   String?
+  codigo      String?
+  apoderado   String?
 }

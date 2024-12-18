@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { SendemailsService } from './sendemails.service';
 import { SendemailsController } from './sendemails.controller';
 import * as dotenv from 'dotenv'
+import { PrismaService } from '../services/prisma.service';
 
 
 dotenv.config();
@@ -21,7 +22,7 @@ dotenv.config();
             }
         })
     ],
-    providers: [SendemailsService],
+    providers: [SendemailsService,PrismaService],
     controllers: [SendemailsController]
 })
 export class SendemailsModule { }

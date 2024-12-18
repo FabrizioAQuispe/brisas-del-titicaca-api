@@ -5,7 +5,7 @@ export interface ComidasPublic extends Comidass {
 export interface CategoriasPublic {
     id: number,
     nombre: string,
-    descripcion: string
+    descripcion: string,
 }
 
 export interface Comidass {

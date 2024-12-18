@@ -10,7 +10,11 @@ export class CategoriasService {
 
     async getCategoriasAdmin(){
         try{
-            const categorias = await this.prisma.categorias.findMany();
+            const categorias = await this.prisma.categorias.findMany({
+                orderBy: {
+                    orden: "desc"
+                }
+            });
             return categorias;
         } catch(err){
             throw new Error(`Error al obtener categorías: ${err.message}`);
