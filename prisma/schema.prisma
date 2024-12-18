@@ -145,6 +145,8 @@ model categorias {
   comidas comidas[] @relation("CategoriaComidas")
 }
 
+
+
 model categorias_talleres {
   id        Int                @id @default(autoincrement())
   categoria String             @db.VarChar(255)
