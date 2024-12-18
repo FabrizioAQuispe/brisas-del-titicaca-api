@@ -46,6 +46,9 @@ export class ComidasService {
             const response = await this.prisma.categorias.findMany({
                 include: {
                     comidas: true
+                },
+                orderBy:{
+                    orden: "asc"
                 }
             })
             if(!response){
