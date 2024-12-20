@@ -1,0 +1,237 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model permisos {
+  id             Int              @id @default(autoincrement())
+  nombre         String?          @db.VarChar(255)
+  permisos_roles permisos_roles[]
+}
+
+model permisos_roles {
+  id        Int       @id @default(autoincrement())
+  idRol     Int?
+  idPermiso Int?
+  permiso   permisos? @relation(fields: [idPermiso], references: [id])
+  rol       roles?    @relation(fields: [idRol], references: [id])
+
+  @@unique([idRol, idPermiso])
+  @@index([idPermiso], map: "permisos_roles_idPermiso_fkey")
+}
+
+model roles {
+  id             Int              @id @default(autoincrement())
+  nombre         String?          @db.VarChar(45)
+  permisos_roles permisos_roles[]
+  usuarios_roles usuarios_roles[]
+}
+
+model user {
+  username       String           @db.VarChar(16)
+  razon_social   String           @db.VarChar(255)
+  email          String?          @db.VarChar(255)
+  password       String           @db.VarChar(255)
+  create_time    DateTime?        @default(now()) @db.Timestamp(0)
+  dni            String?          @db.VarChar(45)
+  id             Int              @id @default(autoincrement())
+  eventos        eventos[]
+  noticias       noticias[]
+  talleres       talleres[]
+  usuarios_roles usuarios_roles[]
+}
+
+model usuarios_roles {
+  id        Int    @id @default(autoincrement())
+  idUsuario Int?
+  idRol     Int?
+  rol       roles? @relation(fields: [idRol], references: [id])
+  usuario   user?  @relation(fields: [idUsuario], references: [id])
+
+  @@unique([idUsuario, idRol])
+  @@index([idRol], map: "usuarios_roles_idRol_fkey")
+}
+
+model eventos {
+  idUser         Int?
+  id             Int              @id @default(autoincrement())
+  nombre         String?          @db.VarChar(255)
+  descripcion    String?          @db.VarChar(255)
+  image          String?          @db.VarChar(500)
+  fecha_creacion DateTime?        @db.Date
+  fecha_edicion  DateTime?        @db.Date
+  precio         Float?
+  slug           String?          @db.Text
+  bg_color       String?          @default("000") @db.VarChar(10)
+  tipo           Int?
+  user           user?            @relation(fields: [idUser], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "eventos_ibfk_1")
+  fechas         eventos_fechas[] @relation("EventoFechas")
+  paquetes       paquetes[]       @relation("EventosPaquetes")
+
+  @@index([idUser], map: "idUser")
+}
+
+model eventos_fechas {
+  id             Int       @id @default(autoincrement())
+  fecha_creacion DateTime? @db.Date
+  eventoId       Int
+  evento         eventos   @relation("EventoFechas", fields: [eventoId], references: [id])
+
+  @@index([eventoId], map: "eventoId_index")
+}
+
+model paquetes {
+  id          Int     @id @default(autoincrement())
+  eventoId    Int
+  nombre      String? @db.VarChar(255)
+  image       String? @db.Text
+  precio      Json?
+  descripcion String? @db.VarChar(255)
+  evento      eventos @relation("EventosPaquetes", fields: [eventoId], references: [id])
+
+  @@index([eventoId], map: "paquetes_eventoId_fkey")
+}
+
+model noticias {
+  idUser         Int?
+  id             Int       @id @default(autoincrement())
+  titulo         String?   @db.VarChar(255)
+  descripcion    String?   @db.VarChar(255)
+  fecha_creacion DateTime? @db.Date
+  fecha_edicion  DateTime? @db.Date
+  user           user?     @relation(fields: [idUser], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "noticias_ibfk_1")
+
+  @@index([idUser], map: "idUser")
+}
+
+model talleres {
+  idUser            Int?
+  id                Int       @id @default(autoincrement())
+  nombre            String?   @db.VarChar(255)
+  precio            Float?
+  fecha_publicacion DateTime? @db.Date
+  fecha_creacion    DateTime? @db.Date
+  fecha_edicion     DateTime? @db.Date
+  user              user?     @relation(fields: [idUser], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "talleres_ibfk_1")
+
+  @@index([idUser], map: "idUser")
+}
+
+model fundadodres {
+  id          Int     @id @default(autoincrement())
+  imagen      String? @db.Text
+  nombre      String  @db.VarChar(255)
+  fecha       String  @db.VarChar(255)
+  descripcion Json?
+}
+
+model danzas {
+  id          Int     @id @default(autoincrement())
+  nombre      Json?
+  descripcion Json?
+  image       String? @db.Text
+  slug        String? @db.Text
+  video       String?
+}
+
+model categorias {
+  id      Int       @id @default(autoincrement())
+  nombre  String    @db.VarChar(255)
+  orden   Int?      @default(100)
+  comidas comidas[] @relation("CategoriaComidas")
+}
+
+model categorias_talleres {
+  id                      Int                    @id @default(autoincrement())
+  categoria               String                 @db.VarChar(255)
+  orden                   Int?                   @default(0)
+  tipo                    String?                @db.VarChar(20)
+  talleres                talleres_galeria[]     @relation("CategoriaTalleres")
+  eventos_culturales      eventos_culturales[]   @relation("CategoriasCulturales")
+}
+
+model tomos {
+  id         Int               @id @default(autoincrement())
+  titulo     Json?
+  image      String            @db.Text
+  contenidos tomos_contenido[]
+}
+
+model tomos_contenido {
+  id          Int     @id @default(autoincrement())
+  titulo      Json?
+  descripcion Json?
+  leyenda     Json?
+  image       String? @db.Text
+  tomoId      Int
+  tomo        tomos   @relation(fields: [tomoId], references: [id])
+
+  @@index([tomoId], map: "tomos_contenido_tomoId_fkey")
+}
+
+model comidas {
+  id          Int        @id @default(autoincrement())
+  idUser      Int
+  categoriaId Int
+  nombre      String     @db.VarChar(255)
+  precio      Float?     @default(0)
+  image       String?    @db.Text
+  descripcion Json?
+  orden       Int?       @default(100)
+  categoria   categorias @relation("CategoriaComidas", fields: [categoriaId], references: [id])
+
+  @@index([categoriaId], map: "comidas_categoriaId_fkey")
+}
+
+model presidentes {
+  id             Int     @id @default(autoincrement())
+  nombre         String  @db.VarChar(255)
+  fecha          String  @db.VarChar(255)
+  descripcion    Json?
+  imagePresident String? @db.Text
+  imageJunta     String? @db.Text
+}
+
+model popup {
+  id    Int     @id @default(autoincrement())
+  image String? @db.Text
+  link  String? @db.Text
+}
+
+model promociones {
+  id         Int     @id @default(autoincrement())
+  dia        String  @db.VarChar(255)
+  imageFondo String? @db.Text
+  imagePlato String? @db.Text
+}
+model eventos_culturales {
+  id                      Int                    @id @default(autoincrement())
+  image                   String?                @db.Text
+  categorias_culturalesId Int                    @default(3)
+  categorias_culturales   categorias_talleres    @relation("CategoriasCulturales", fields: [categorias_culturalesId], references: [id])
+}
+
+model talleres_galeria {
+  id                    Int                  @id @default(autoincrement())
+  image                 String?              @db.Text
+  categorias_talleresId Int?
+  categorias_taller     categorias_talleres? @relation("CategoriaTalleres", fields: [categorias_talleresId], references: [id])
+
+  @@index([categorias_talleresId], map: "talleres_galeria_categorias_talleresId_fkey")
+}
+
+model correos {
+  id          Int       @id @default(autoincrement())
+  nombre      String?   @db.VarChar(255)
+  telefono    String?
+  correo      String?
+  descripcion String?
+  documento   String?
+  codigo      String?
+  apoderado   String?
+  fecha_evio  DateTime? @default(now()) @db.DateTime(0)
+}
