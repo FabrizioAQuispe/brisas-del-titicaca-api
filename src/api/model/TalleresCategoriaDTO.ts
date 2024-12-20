@@ -1,6 +1,6 @@
 export interface TalleresCategoria{
-    id:number,
+    id?:number,
     categoria:string,
-    orden:number,
-    tipo:string
+    orden?:number,
+    tipo?:string
 }
